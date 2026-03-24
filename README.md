@@ -1,6 +1,6 @@
 # Portal Institucional
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/alicino-m/cgc30-build)
 
 A production-ready fullstack application built on Cloudflare Workers and Pages. Features a modern React frontend with shadcn/ui components, Tailwind CSS, API routes powered by Hono, and seamless deployment to Cloudflare's global edge network.
 
@@ -117,7 +117,7 @@ npx wrangler login
 
 Configure your Cloudflare account and zone in `wrangler.toml` if needed.
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/alicino-m/cgc30-build)
 
 ## Scripts
 
