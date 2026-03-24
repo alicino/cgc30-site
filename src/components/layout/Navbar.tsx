@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Landmark } from 'lucide-react';
+import { Menu, X, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -22,9 +22,12 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2 group">
             <div className="bg-primary text-primary-foreground p-1.5 rounded-lg transition-transform group-hover:scale-110">
-              <Landmark className="h-6 w-6" />
+              <ShieldCheck className="h-6 w-6" />
             </div>
-            <span className="font-playfair text-xl font-bold tracking-tight">Portal Lusófono</span>
+            <div className="flex flex-col">
+              <span className="font-playfair text-lg font-bold leading-none tracking-tight">Grande Campinas</span>
+              <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Capítulo nº 30</span>
+            </div>
           </Link>
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">

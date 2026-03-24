@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ChevronRight, Landmark, Image as ImageIcon, Download, BookOpen, Calendar, Info } from 'lucide-react';
+import { ChevronRight, Shield, Image as ImageIcon, Download, Heart, Calendar } from 'lucide-react';
 import { cn } from '@/lib/utils';
 const FEATURES = [
-  { icon: ImageIcon, title: 'Galeria', desc: 'Explore registros visuais da nossa trajetória.', link: '/galeria', color: 'bg-blue-500/10 text-blue-600' },
-  { icon: Download, title: 'Downloads', desc: 'Acesse documentos e materiais oficiais.', link: '/downloads', color: 'bg-amber-500/10 text-amber-600' },
-  { icon: BookOpen, title: 'Artigos', desc: 'Leia publicações e análises institucionais.', link: '/artigos', color: 'bg-emerald-500/10 text-emerald-600' },
-  { icon: Calendar, title: 'Calendário', desc: 'Fique por dentro dos próximos eventos.', link: '/calendario', color: 'bg-purple-500/10 text-purple-600' },
+  { icon: ImageIcon, title: 'Atividades', desc: 'Registros das nossas cerimônias e eventos.', link: '/galeria', color: 'bg-blue-500/10 text-blue-600' },
+  { icon: Download, title: 'Materiais', desc: 'Manuais e documentos para membros.', link: '/downloads', color: 'bg-amber-500/10 text-amber-600' },
+  { icon: Heart, title: 'Virtudes', desc: 'Conheça os pilares da nossa ordem.', link: '/sobre', color: 'bg-emerald-500/10 text-emerald-600' },
+  { icon: Calendar, title: 'Agenda', desc: 'Próximas reuniões e convocações.', link: '/calendario', color: 'bg-purple-500/10 text-purple-600' },
 ];
 export function HomePage() {
   return (
@@ -24,8 +24,8 @@ export function HomePage() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
             >
-              <Landmark className="h-4 w-4" />
-              Institucional
+              <Shield className="h-4 w-4" />
+              Capítulo Grande Campinas nº 30
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -33,8 +33,8 @@ export function HomePage() {
               transition={{ delay: 0.1, duration: 0.6 }}
               className="text-display font-playfair font-bold text-foreground"
             >
-              Excelência e Tradição <br />
-              <span className="text-secondary">a Serviço da Comunidade</span>
+              Formando os Líderes <br />
+              <span className="text-secondary text-4xl md:text-6xl italic">do Amanhã</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -42,8 +42,8 @@ export function HomePage() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-body text-xl max-w-2xl mx-auto"
             >
-              Bem-vindo ao Portal Institucional. Aqui você encontra transparência, 
-              inovação e todo o conteúdo oficial da nossa organização.
+              A Ordem DeMolay prepara jovens de 12 a 21 anos para um futuro de liderança, 
+              responsabilidade cidadã e amizade fraternal através de virtudes sólidas.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -52,10 +52,10 @@ export function HomePage() {
               className="flex flex-wrap justify-center gap-4 pt-4"
             >
               <Button size="lg" className="rounded-full gap-2 px-8" asChild>
-                <Link to="/sobre">Conheça-nos <ChevronRight className="h-4 w-4" /></Link>
+                <Link to="/sobre">Saiba Mais <ChevronRight className="h-4 w-4" /></Link>
               </Button>
               <Button size="lg" variant="outline" className="rounded-full px-8" asChild>
-                <Link to="/artigos">Ver Artigos</Link>
+                <Link to="/artigos">Ler Artigos</Link>
               </Button>
             </motion.div>
           </div>
@@ -92,12 +92,12 @@ export function HomePage() {
         <div className="bg-primary rounded-3xl p-8 md:p-16 text-primary-foreground text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent pointer-events-none" />
           <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl md:text-5xl font-playfair font-bold">Mantenha-se Atualizado</h2>
+            <h2 className="text-3xl md:text-5xl font-playfair font-bold">Faça Parte da Nossa Fraternidade</h2>
             <p className="text-primary-foreground/80 text-lg">
-              Acompanhe nossos eventos e publicações mais recentes diretamente no calendário.
+              Descubra como a Ordem DeMolay pode transformar a sua vida e a sua comunidade.
             </p>
             <Button size="lg" variant="secondary" className="rounded-full px-10 font-bold" asChild>
-              <Link to="/calendario">Ver Agenda</Link>
+              <Link to="/calendario">Conheça Nossas Reuniões</Link>
             </Button>
           </div>
         </div>
