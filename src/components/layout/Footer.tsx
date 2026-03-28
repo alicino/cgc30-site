@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Mail, Phone, MapPin } from 'lucide-react';
+import { ShieldCheck, Mail, MapPin } from 'lucide-react';
 export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
@@ -19,21 +19,18 @@ export function Footer() {
             <h3 className="font-bold text-foreground">Contato do Capítulo</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4" /> contato@grande-campinas30.org
+                <Mail className="h-4 w-4" /> contato@cgc30.com
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4" /> +55 (19) 3000-0030
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" /> Centro de Campinas, SP
+                <MapPin className="h-4 w-4" /> Av. Orosimbo Maia, 280 - Centro, Campinas - SP, 13010-211
               </li>
             </ul>
           </div>
           <div className="space-y-4">
             <h3 className="font-bold text-foreground">Siga-nos</h3>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">Instagram</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">Facebook</a>
+              <a href="https://www.instagram.com/cgc_30/" className="text-muted-foreground hover:text-primary transition-colors text-sm" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://www.facebook.com/demolaycampinas" className="text-muted-foreground hover:text-primary transition-colors text-sm" target="_blank" rel="noopener noreferrer">Facebook</a>
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">YouTube</a>
             </div>
           </div>

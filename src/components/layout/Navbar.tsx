@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ShieldCheck } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import demolayLogo from '@/assets/demolay-logo.png';
 const NAV_LINKS = [
   { name: 'Início', href: '/' },
   { name: 'Galeria', href: '/galeria' },
@@ -21,9 +22,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="bg-primary text-primary-foreground p-1.5 rounded-lg transition-transform group-hover:scale-110">
-              <ShieldCheck className="h-6 w-6" />
-            </div>
+            <img src={demolayLogo} alt="Capítulo Grande Campinas nº 30" className="h-12 md:h-14 w-auto object-contain transition-transform group-hover:scale-105" />
             <div className="flex flex-col">
               <span className="font-playfair text-lg font-bold leading-none tracking-tight">Grande Campinas</span>
               <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Capítulo nº 30</span>
