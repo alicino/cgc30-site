@@ -34,7 +34,7 @@ export function HomePage() {
         {/* Overlay para Legibilidade */}
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-black/40 to-background" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-          <div className="text-center space-y-6 md:space-y-8">
+          <div className="text-center space-y-6 md:space-y-8 pb-36">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -90,7 +90,7 @@ export function HomePage() {
         </motion.div>
       </section>
       {/* Highlights Grid */}
-      <section className="py-20 md:py-28 lg:py-32 bg-background relative z-30 -mt-10 rounded-t-[3rem] shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.1)]">
+      <section className="pt-20 md:pt-28 lg:pt-32 pb-10 md:pb-14 bg-background relative z-30 -mt-10 rounded-t-[3rem] shadow-[0_-20px_50px_-12px_rgba(0,0,0,0.1)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 space-y-4">
             <h2 className="text-3xl md:text-4xl font-playfair font-bold">Excelência e Fraternidade</h2>
@@ -125,7 +125,7 @@ export function HomePage() {
         </div>
       </section>
       {/* CTA Section Revisitada */}
-      <section className="py-20 md:py-28 lg:py-32 overflow-hidden">
+      <section className="pt-10 md:pt-14 pb-20 md:pb-28 lg:pb-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
