@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal do Time — Projeto CGC30.com</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNSIgZmlsbD0iIzFCM0E2QiIvPjxsaW5lIHgxPSI4IiB5MT0iNCIgeDI9IjgiIHkyPSIyOCIgc3Ryb2tlPSIjQzk4ODJFIiBzdHJva2Utd2lkdGg9IjEuNSIvPjxyZWN0IHg9IjkiIHk9IjYiIHdpZHRoPSIxMyIgaGVpZ2h0PSI0IiByeD0iMS41IiBmaWxsPSIjMkU3RDlEIi8+PHJlY3QgeD0iOSIgeT0iMTIiIHdpZHRoPSI5IiBoZWlnaHQ9IjQiIHJ4PSIxLjUiIGZpbGw9IiMxNjY1MzQiLz48cmVjdCB4PSIxMyIgeT0iMTgiIHdpZHRoPSIxMSIgaGVpZ2h0PSI0IiByeD0iMS41IiBmaWxsPSIjQzk4ODJFIi8+PHJlY3QgeD0iMTYiIHk9IjI0IiB3aWR0aD0iNyIgaGVpZ2h0PSIzIiByeD0iMS41IiBmaWxsPSIjREMyNjI2Ii8+PC9zdmc+Cg==">
+  <style>
+    /* ── RESET & BASE ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:      #1B3A6B;
+      --dark-navy: #0D1F3C;
+      --gold:      #C9882E;
+      --gold-lt:   #F5D48E;
+      --teal:      #2E7D9D;
+      --white:     #FFFFFF;
+      --bg:        #F5F6FA;
+      --gray:      #64748B;
+      --text:      #1E293B;
+      --border:    #E2E8F0;
+      --green:     #166534;
+      --green-bg:  #DCFCE7;
+      --amber-bg:  #FEF3C7;
+      --amber:     #92400E;
+      --red-bg:    #FEE2E2;
+      --red:       #991B1B;
+      --sidebar-w: 260px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px;
+           color: var(--text); background: var(--bg); line-height: 1.6; }
+
+    /* ── LOGIN ────────────────────────────────────────────────────────── */
+    #login-screen {
+      position: fixed; inset: 0; background: var(--dark-navy);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; flex-direction: column; gap: 0;
+    }
+    #login-screen.hidden { display: none; }
+    .login-box {
+      background: var(--navy); border-radius: 12px; padding: 48px 40px;
+      width: 100%; max-width: 420px; box-shadow: 0 24px 60px rgba(0,0,0,.4);
+      border: 1px solid rgba(201,136,46,.25);
+    }
+    .login-logo { text-align: center; margin-bottom: 32px; }
+    .login-logo h1 { font-size: 2.2rem; font-weight: 800; color: var(--white); letter-spacing: -1px; }
+    .login-logo span { color: var(--gold); }
+    .login-logo p { color: #A0AEC0; font-size: .9rem; margin-top: 4px; }
+    .login-box label { display: block; font-size: .8rem; font-weight: 600;
+                       color: var(--gold-lt); letter-spacing: .05em; margin-bottom: 8px; }
+    .login-box input[type="password"] {
+      width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.08); color: var(--white); font-size: 1rem;
+      outline: none; transition: border .2s;
+    }
+    .login-box input[type="password"]:focus { border-color: var(--gold); }
+    .login-box button {
+      margin-top: 20px; width: 100%; padding: 13px;
+      background: var(--gold); color: var(--dark-navy); font-size: 1rem;
+      font-weight: 700; border: none; border-radius: 8px; cursor: pointer;
+      transition: background .2s, transform .1s;
+    }
+    .login-box button:hover { background: var(--gold-lt); }
+    .login-box button:active { transform: scale(.98); }
+    #login-error {
+      margin-top: 14px; text-align: center; color: #FCA5A5;
+      font-size: .88rem; display: none;
+    }
+    .login-hint { margin-top: 24px; text-align: center; font-size: .8rem; color: #64748B; }
+
+    /* ── APP SHELL ────────────────────────────────────────────────────── */
+    #app { display: none; min-height: 100vh; }
+    #app.visible { display: flex; }
+
+    /* ── SIDEBAR ──────────────────────────────────────────────────────── */
+    #sidebar {
+      width: var(--sidebar-w); background: var(--dark-navy);
+      position: fixed; top: 0; left: 0; height: 100vh;
+      overflow-y: auto; display: flex; flex-direction: column;
+      z-index: 200; transition: transform .3s;
+    }
+    .sidebar-logo {
+      padding: 24px 20px 16px;
+      border-bottom: 1px solid rgba(201,136,46,.25);
+    }
+    .sidebar-logo h2 { color: var(--white); font-size: 1.1rem; font-weight: 800; }
+    .sidebar-logo h2 span { color: var(--gold); }
+    .sidebar-logo p { color: var(--gray); font-size: .75rem; margin-top: 2px; }
+    nav { padding: 12px 0; flex: 1; }
+    nav a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; color: #94A3B8; text-decoration: none;
+      font-size: .88rem; font-weight: 500; border-left: 3px solid transparent;
+      transition: all .15s;
+    }
+    nav a:hover { color: var(--white); background: rgba(255,255,255,.05); }
+    nav a.active { color: var(--gold); border-left-color: var(--gold);
+                   background: rgba(201,136,46,.08); }
+    nav .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+    nav .nav-section {
+      padding: 16px 20px 6px; font-size: .7rem; font-weight: 700;
+      color: #475569; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .sidebar-footer {
+      padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .sidebar-footer button {
+      font-size: .78rem; color: #64748B; background: none; border: none;
+      cursor: pointer; padding: 0;
+    }
+    .sidebar-footer button:hover { color: #FCA5A5; }
+
+    /* ── MAIN CONTENT ─────────────────────────────────────────────────── */
+    #main {
+      margin-left: var(--sidebar-w); flex: 1;
+      padding: 40px 48px; max-width: calc(100% - var(--sidebar-w));
+    }
+    .section { display: none; max-width: 860px; }
+    .section.active { display: block; }
+
+    /* ── TOPBAR (mobile) ──────────────────────────────────────────────── */
+    #topbar {
+      display: none; background: var(--dark-navy); padding: 14px 20px;
+      position: sticky; top: 0; z-index: 100; align-items: center; gap: 12px;
+    }
+    #topbar h3 { color: var(--white); font-size: 1rem; font-weight: 700; }
+    #topbar span { color: var(--gold); }
+    #menu-btn { background: none; border: none; color: var(--gold);
+                font-size: 1.4rem; cursor: pointer; margin-left: auto; }
+
+    /* ── TYPOGRAPHY ───────────────────────────────────────────────────── */
+    .page-title {
+      font-size: 1.75rem; font-weight: 800; color: var(--navy);
+      border-bottom: 3px solid var(--gold); padding-bottom: 12px;
+      margin-bottom: 28px;
+    }
+    h2.sub { font-size: 1.2rem; color: var(--navy); margin: 28px 0 10px; font-weight: 700; }
+    h3.sub3 { font-size: 1rem; color: var(--teal); margin: 20px 0 8px; font-weight: 700; }
+    p { margin-bottom: 12px; color: var(--text); }
+    strong { color: var(--navy); }
+    a { color: var(--teal); }
+
+    /* ── CARDS ────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--white); border-radius: 10px; padding: 20px 24px;
+      border: 1px solid var(--border); margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .card-title { font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .card.highlight { border-left: 4px solid var(--gold); }
+    .card.info    { border-left: 4px solid var(--teal); background: #F0F9FF; }
+    .card.warning { border-left: 4px solid var(--gold); background: var(--amber-bg); }
+    .card.danger  { border-left: 4px solid #DC2626; background: var(--red-bg); }
+    .card.success { border-left: 4px solid var(--green); background: var(--green-bg); }
+
+    /* ── TAGS ─────────────────────────────────────────────────────────── */
+    .tag {
+      display: inline-block; padding: 2px 10px; border-radius: 999px;
+      font-size: .75rem; font-weight: 700; margin: 2px;
+    }
+    .tag-navy   { background: var(--navy);  color: var(--white); }
+    .tag-gold   { background: var(--gold);  color: var(--dark-navy); }
+    .tag-teal   { background: var(--teal);  color: var(--white); }
+    .tag-green  { background: var(--green); color: var(--white); }
+    .tag-purple { background: #7C3AED;      color: var(--white); }
+    .tag-orange { background: #EA580C;      color: var(--white); }
+    .tag-yellow { background: #CA8A04;      color: var(--white); }
+    .tag-red    { background: #DC2626;      color: var(--white); }
+    .tag-gray   { background: #475569;      color: var(--white); }
+
+    /* ── TABLE ────────────────────────────────────────────────────────── */
+    .tbl { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .88rem; }
+    .tbl th { background: var(--navy); color: var(--white); padding: 10px 14px;
+              text-align: left; font-weight: 600; }
+    .tbl td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .tbl tr:nth-child(even) td { background: #F8FAFC; }
+    .tbl tr:hover td { background: #EFF6FF; }
+
+    /* ── FLOW ─────────────────────────────────────────────────────────── */
+    .flow { display: flex; gap: 0; flex-wrap: wrap; margin: 16px 0; }
+    .flow-step {
+      display: flex; align-items: center; gap: 0;
+    }
+    .flow-box {
+      background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px 16px; text-align: center; min-width: 120px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .flow-box .num {
+      width: 28px; height: 28px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; font-weight: 700;
+      font-size: .85rem; color: var(--white); margin: 0 auto 6px;
+    }
+    .flow-box .label { font-size: .78rem; font-weight: 700; color: var(--navy); }
+    .flow-box .desc  { font-size: .72rem; color: var(--gray); margin-top: 2px; }
+    .flow-arrow { font-size: 1.2rem; color: var(--gold); padding: 0 6px;
+                  display: flex; align-items: center; }
+
+    /* ── CODE / COPYBOX ───────────────────────────────────────────────── */
+    .copybox {
+      background: var(--dark-navy); border-radius: 8px; padding: 20px;
+      position: relative; margin: 12px 0;
+    }
+    .copybox pre { color: #CBD5E1; font-size: .82rem; white-space: pre-wrap;
+                   word-break: break-word; font-family: 'Consolas', monospace; }
+    .copy-btn {
+      position: absolute; top: 10px; right: 10px; background: var(--gold);
+      color: var(--dark-navy); border: none; border-radius: 6px;
+      padding: 5px 12px; font-size: .75rem; font-weight: 700; cursor: pointer;
+      transition: background .2s;
+    }
+    .copy-btn:hover { background: var(--gold-lt); }
+    .copy-btn.copied { background: #22C55E; color: var(--white); }
+
+    /* ── CHECKLIST ────────────────────────────────────────────────────── */
+    .checklist-section { margin-bottom: 24px; }
+    .checklist-section h3 { font-size: 1rem; font-weight: 700; color: var(--navy);
+                             margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .check-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 14px; background: var(--white); border-radius: 8px;
+      border: 1px solid var(--border); margin-bottom: 6px; cursor: pointer;
+      transition: background .15s;
+    }
+    .check-item:hover { background: #F8FAFC; }
+    .check-item input[type="checkbox"] {
+      margin-top: 2px; width: 17px; height: 17px; cursor: pointer;
+      accent-color: var(--navy); flex-shrink: 0;
+    }
+    .check-item label { cursor: pointer; font-size: .88rem; }
+    .check-item.done label { text-decoration: line-through; color: var(--gray); }
+    .priority-r { color: #DC2626; font-weight: 700; font-size: .75rem;
+                  margin-left: 6px; }
+    .priority-y { color: #CA8A04; font-weight: 700; font-size: .75rem;
+                  margin-left: 6px; }
+    .priority-g { color: var(--green); font-weight: 700; font-size: .75rem;
+                  margin-left: 6px; }
+    .checklist-progress {
+      background: var(--border); border-radius: 999px; height: 8px; margin: 8px 0 16px;
+    }
+    .checklist-progress-bar {
+      background: var(--navy); height: 8px; border-radius: 999px;
+      transition: width .3s;
+    }
+    .checklist-count { font-size: .8rem; color: var(--gray); margin-bottom: 4px; }
+
+    /* ── GRID DE MEMBROS ──────────────────────────────────────────────── */
+    .members-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+    .member-card {
+      background: var(--white); border-radius: 10px; border: 1px solid var(--border);
+      padding: 16px; display: flex; gap: 14px; align-items: flex-start;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .member-avatar {
+      width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 800; color: var(--white);
+    }
+    .member-info h4 { font-size: .95rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .member-info p  { font-size: .78rem; color: var(--gray); margin: 0; line-height: 1.4; }
+    .member-info .contact { font-size: .78rem; margin-top: 6px; color: var(--teal); }
+
+    /* ── TRELLO COLUMNS ───────────────────────────────────────────────── */
+    .trello-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 16px 0; }
+    .tcol {
+      background: var(--white); border-radius: 10px; border: 1px solid var(--border);
+      padding: 14px; border-top: 4px solid var(--navy);
+    }
+    .tcol h4 { font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .tcol p  { font-size: .8rem; color: var(--gray); }
+
+    /* ── TOOLS GRID ───────────────────────────────────────────────────── */
+    .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+    .tool-card {
+      background: var(--white); border-radius: 10px; border: 1px solid var(--border);
+      padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    }
+    .tool-card h4 { font-size: .95rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .tool-card p  { font-size: .82rem; color: var(--gray); margin: 0 0 8px; }
+    .tool-card a  { font-size: .82rem; }
+
+    /* ── WELCOME BOXES ────────────────────────────────────────────────── */
+    .quick-links { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 20px 0; }
+    .ql-card {
+      background: var(--white); border-radius: 10px; border: 1px solid var(--border);
+      padding: 16px; text-align: center; cursor: pointer; text-decoration: none;
+      transition: box-shadow .15s, transform .15s; display: block;
+    }
+    .ql-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); transform: translateY(-2px); }
+    .ql-card .icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .ql-card h4 { font-size: .85rem; font-weight: 700; color: var(--navy); }
+    .ql-card p  { font-size: .75rem; color: var(--gray); margin: 0; }
+
+    /* ── BRIEFING FORM ────────────────────────────────────────────────── */
+    .form-field { margin-bottom: 16px; }
+    .form-field label { display: block; font-size: .8rem; font-weight: 700;
+                        color: var(--navy); margin-bottom: 6px; }
+    .form-field input, .form-field textarea, .form-field select {
+      width: 100%; padding: 10px 14px; border: 1px solid var(--border);
+      border-radius: 8px; font-size: .9rem; color: var(--text);
+      font-family: inherit; background: var(--white); outline: none;
+      transition: border .2s;
+    }
+    .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+      border-color: var(--navy);
+    }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .btn-generate {
+      background: var(--navy); color: var(--white); border: none; border-radius: 8px;
+      padding: 12px 24px; font-size: .9rem; font-weight: 700; cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-generate:hover { background: var(--teal); }
+    #briefing-output { display: none; margin-top: 20px; }
+
+    /* ── CRONOLOGIA — LARGURA FIXA ───────────────────────────────────── */
+    #sec-cronologia { max-width: 1000px; }
+    #sec-cronologia .mermaid svg { width: 100% !important; height: auto !important; }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #sidebar { transform: translateX(-100%); }
+      #sidebar.open { transform: translateX(0); }
+      #main { margin-left: 0; padding: 20px 16px; max-width: 100%; }
+      #topbar { display: flex; }
+      .members-grid, .tools-grid, .quick-links { grid-template-columns: 1fr; }
+      .trello-cols { grid-template-columns: 1fr 1fr; }
+      .flow { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); align-self: center; }
+    }
+    @media (max-width: 480px) {
+      .trello-cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- LOGIN                                                                   -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <h1>CGC<span>30</span>.COM</h1>
+      <p>Portal do Time — Área Exclusiva</p>
+    </div>
+    <label for="pwd">Senha de acesso</label>
+    <input type="password" id="pwd" placeholder="••••••••••••••••••••"
+           onkeydown="if(event.key==='Enter') doLogin()" />
+    <button onclick="doLogin()">Entrar</button>
+    <div id="login-error">Senha incorreta. Tente novamente.</div>
+    <p class="login-hint">Acesso exclusivo para membros do projeto.<br>Entre em contato com o Coordenador para obter a senha.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- APP                                                                     -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- TOPBAR mobile -->
+  <div id="topbar">
+    <h3>CGC<span>30</span>.COM</h3>
+    <button id="menu-btn" onclick="toggleSidebar()">☰</button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <h2>CGC<span>30</span>.COM</h2>
+      <p>Portal do Time · 2026</p>
+    </div>
+    <nav>
+      <div class="nav-section">Geral</div>
+      <a href="#" class="nav-link active" data-section="inicio" onclick="show('inicio',this)">
+        <span class="nav-icon">🏠</span> Início
+      </a>
+      <a href="#" class="nav-link" data-section="projeto" onclick="show('projeto',this)">
+        <span class="nav-icon">📋</span> O Projeto
+      </a>
+      <a href="#" class="nav-link" data-section="time" onclick="show('time',this)">
+        <span class="nav-icon">👥</span> O Time
+      </a>
+
+      <div class="nav-section">Ferramentas</div>
+      <a href="#" class="nav-link" data-section="trello" onclick="show('trello',this)">
+        <span class="nav-icon">✅</span> Trello
+      </a>
+      <a href="#" class="nav-link" data-section="ferramentas" onclick="show('ferramentas',this)">
+        <span class="nav-icon">🛠</span> Ferramentas
+      </a>
+
+      <div class="nav-section">Conteúdo</div>
+      <a href="#" class="nav-link" data-section="fluxo" onclick="show('fluxo',this)">
+        <span class="nav-icon">🔄</span> Fluxo de Aprovação
+      </a>
+      <a href="#" class="nav-link" data-section="briefing" onclick="show('briefing',this)">
+        <span class="nav-icon">📝</span> Briefing Colaborador
+      </a>
+
+      <div class="nav-section">Lançamento</div>
+      <a href="#" class="nav-link" data-section="cronologia" onclick="show('cronologia',this)">
+        <span class="nav-icon">📅</span> Cronologia
+      </a>
+      <a href="#" class="nav-link" data-section="checklist" onclick="show('checklist',this)">
+        <span class="nav-icon">🚀</span> Checklist de Lançamento
+      </a>
+
+    </nav>
+    <div class="sidebar-footer">
+      <button onclick="doLogout()">🚪 Sair</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main id="main">
+
+    <!-- ── INÍCIO ───────────────────────────────────────────────────── -->
+    <div class="section active" id="sec-inicio">
+      <h1 class="page-title">👋 Bem-vindo ao Portal do Time</h1>
+
+      <div class="card highlight">
+        <p><strong>Projeto CGC30.com</strong> — Site institucional do Capítulo Grande Campinas n.30.<br>
+        Esta é a sua central de informações. Aqui estão todas as orientações, ferramentas e recursos para que você possa contribuir com o projeto.</p>
+      </div>
+
+      <div class="card info">
+        <div class="card-title">📅 Fase Atual: Fase 1 — Estruturação</div>
+        <p style="margin:6px 0 0">Período: Maio/2026 · Foco: Kick-off, onboarding no Trello, acesso ao GitHub, grupo WhatsApp.</p>
+      </div>
+
+      <h2 class="sub">Acesso rápido</h2>
+      <div class="quick-links">
+        <a class="ql-card" href="#" onclick="show('trello', document.querySelector('[data-section=trello]'))">
+          <div class="icon">✅</div>
+          <h4>Trello</h4>
+          <p>Como usar o board</p>
+        </a>
+        <a class="ql-card" href="#" onclick="show('fluxo', document.querySelector('[data-section=fluxo]'))">
+          <div class="icon">🔄</div>
+          <h4>Fluxo de Conteúdo</h4>
+          <p>Como publicar conteúdo</p>
+        </a>
+        <a class="ql-card" href="#" onclick="show('briefing', document.querySelector('[data-section=briefing]'))">
+          <div class="icon">📝</div>
+          <h4>Briefing</h4>
+          <p>Recrutar colaboradores</p>
+        </a>
+        <a class="ql-card" href="#" onclick="show('checklist', document.querySelector('[data-section=checklist]'))">
+          <div class="icon">🚀</div>
+          <h4>Checklist</h4>
+          <p>Lançamento em julho</p>
+        </a>
+        <a class="ql-card" href="https://trello.com/b/DYlHKd9h/projeto-cgc30com" target="_blank">
+          <div class="icon">🔗</div>
+          <h4>Abrir Trello</h4>
+          <p>Board do projeto</p>
+        </a>
+        <a class="ql-card" href="https://github.com/alicino/cgc30-landing" target="_blank">
+          <div class="icon">💻</div>
+          <h4>GitHub</h4>
+          <p>Repositório do site</p>
+        </a>
+      </div>
+
+      <h2 class="sub">Cronograma resumido</h2>
+      <table class="tbl">
+        <tr><th>Fase</th><th>Período</th><th>Foco</th></tr>
+        <tr><td><span class="tag tag-navy">Fase 1</span></td><td>Mai/2026 · Sem. 1–2</td><td>Kick-off, Trello, GitHub, WhatsApp</td></tr>
+        <tr><td><span class="tag tag-teal">Fase 2</span></td><td>Mai–Jun · Sem. 2–3</td><td>Diagnóstico do site e inventário de fotos</td></tr>
+        <tr><td><span class="tag tag-gold">Fase 3</span></td><td>Jun–Jul · Sem. 3–8</td><td>Produção de conteúdo, fotos reais, revisão</td></tr>
+        <tr><td><span class="tag tag-green">Fase 4</span></td><td>Julho/2026</td><td>Lançamento em cgc30.com</td></tr>
+      </table>
+
+      <div class="card warning">
+        <div class="card-title">⚠️ Regra fundamental</div>
+        <p style="margin:6px 0 0"><strong>Nenhum conteúdo vai ao ar sem aprovação do Coordenador Alicino Moura.</strong> Sempre que terminar uma tarefa de conteúdo, mova o card no Trello para "Aprovação (Alicino)" e aguarde o retorno.</p>
+      </div>
+    </div>
+
+    <!-- ── O PROJETO ─────────────────────────────────────────────────── -->
+    <div class="section" id="sec-projeto">
+      <h1 class="page-title">📋 O Projeto</h1>
+
+      <h2 class="sub">O que é</h2>
+      <p>O <strong>Projeto CGC30.com</strong> tem como objetivo atualizar, criar e sustentar o site institucional do <strong>Capítulo Grande Campinas n.30</strong> — uma instituição juvenil masculina (DeMolay) que reúne jovens de 12 a 21 anos, baseada em boas práticas e valores.</p>
+      <p>O site disponível em <a href="https://site.cgc30.com" target="_blank">site.cgc30.com</a> já tem a estrutura técnica completa (~95% pronto). O foco deste projeto é <strong>substituir o conteúdo ilustrativo por informações reais do Capítulo</strong>: textos, fotos e eventos autênticos.</p>
+      <p>A meta é lançar o site no domínio oficial <strong>cgc30.com</strong> até <strong>Julho de 2026</strong>.</p>
+
+      <h2 class="sub">Princípios</h2>
+      <div class="card">✅ Todos os membros são <strong>voluntários</strong> — flexibilidade e autonomia são essenciais.</div>
+      <div class="card">✅ Todas as ferramentas utilizadas são <strong>gratuitas</strong> e disponíveis na internet.</div>
+      <div class="card">✅ <strong>Nenhum conteúdo vai ao ar</strong> sem aprovação do Coordenador (Alicino Moura).</div>
+      <div class="card">✅ Reuniões são feitas <strong>online via Google Meet</strong> — o time está distribuído geograficamente.</div>
+      <div class="card">✅ Todo o projeto é em <strong>Português (Brasil)</strong>.</div>
+
+      <h2 class="sub">Objetivos específicos</h2>
+      <ol style="padding-left:20px;line-height:2">
+        <li>Substituir todo o conteúdo ilustrativo por informações reais do Capítulo.</li>
+        <li>Publicar fotos autênticas de eventos, membros e atividades.</li>
+        <li>Organizar e distribuir tarefas de forma clara entre os membros.</li>
+        <li>Criar um fluxo sustentável de produção e aprovação de conteúdo.</li>
+        <li>Treinar o time no uso das ferramentas de trabalho.</li>
+        <li>Realizar o lançamento no domínio oficial com comunicação coordenada.</li>
+      </ol>
+    </div>
+
+    <!-- ── O TIME ─────────────────────────────────────────────────────── -->
+    <div class="section" id="sec-time">
+      <h1 class="page-title">👥 O Time</h1>
+      <p>7 voluntários com perfis complementares — desde DeMolays ativos até membros experientes do Conselho.</p>
+
+      <div class="members-grid" style="grid-template-columns:1fr;">
+
+        <div class="member-card" style="border-left:4px solid var(--dark-navy)">
+          <div class="member-avatar" style="background:var(--dark-navy)">A</div>
+          <div class="member-info">
+            <h4>Alicino Moura</h4>
+            <p>Coordenador do Projeto · Coordenação Geral</p>
+            <p class="contact">📧 alicino@gmail.com · 📱 +1 (737) 802-4531</p>
+          </div>
+          <span class="tag tag-navy" style="margin-left:auto;align-self:flex-start">Coordenador</span>
+        </div>
+
+        <div class="member-card" style="border-left:4px solid var(--navy)">
+          <div class="member-avatar" style="background:var(--navy)">A</div>
+          <div class="member-info">
+            <h4>Alexandre Lins</h4>
+            <p>Conselho Consultivo · Apoio estratégico e validação institucional</p>
+            <p class="contact">📧 lins.alexandre@gmail.com · 📱 19 99796-8569</p>
+          </div>
+          <span class="tag tag-gray" style="margin-left:auto;align-self:flex-start">Conselho</span>
+        </div>
+
+        <div class="member-card" style="border-left:4px solid var(--teal)">
+          <div class="member-avatar" style="background:var(--teal)">R</div>
+          <div class="member-info">
+            <h4>Renan Pinheiro</h4>
+            <p>DeMolay Ativo · 2° Conselheiro · Técnico em Dev. de Sistemas · <strong>2h/semana</strong></p>
+            <p class="contact">📧 renanpinheiromayara@gmail.com · 📱 19 99234-5022</p>
+          </div>
+          <span class="tag tag-teal" style="margin-left:auto;align-self:flex-start">Tecnologia</span>
+        </div>
+
+        <div class="member-card" style="border-left:4px solid var(--teal)">
+          <div class="member-avatar" style="background:var(--teal)">M</div>
+          <div class="member-info">
+            <h4>Marcelo Fontes</h4>
+            <p>DeMolay Ativo · 16 anos · 2° ano do Ensino Médio · <strong>1h/semana</strong></p>
+            <p class="contact">📧 erikaczcosta4@gmail.com · 📱 19 99712-4438</p>
+          </div>
+          <span class="tag tag-teal" style="margin-left:auto;align-self:flex-start">Tecnologia</span>
+        </div>
+
+        <div class="member-card" style="border-left:4px solid #7C3AED">
+          <div class="member-avatar" style="background:#7C3AED">R</div>
+          <div class="member-info">
+            <h4>Rafael Alves</h4>
+            <p>DeMolay Ativo · Comunicação e Divulgação · <strong>1h/semana</strong></p>
+            <p class="contact">📧 rafael.machado16@icloud.com · 📱 19 99250-1492</p>
+          </div>
+          <span class="tag tag-purple" style="margin-left:auto;align-self:flex-start">Comunicação</span>
+        </div>
+
+        <div class="member-card" style="border-left:4px solid #EA580C">
+          <div class="member-avatar" style="background:#EA580C">R</div>
+          <div class="member-info">
+            <h4>Ricardo Venturini</h4>
+            <p>Sênior DeMolay · Acompanha o Capítulo desde 2010 · <strong>30 min/semana</strong></p>
+            <p class="contact">📧 rickers.ricardo@gmail.com · 📱 19 99847-5723</p>
+          </div>
+          <span class="tag tag-orange" style="margin-left:auto;align-self:flex-start">Fotos e Mídia</span>
+        </div>
+
+        <div class="member-card" style="border-left:4px solid var(--green)">
+          <div class="member-avatar" style="background:var(--green)">J</div>
+          <div class="member-info">
+            <h4>José Baz Jr</h4>
+            <p>Membro do Conselho · Organização e Atualização · <strong>30 min/semana</strong></p>
+            <p class="contact">📧 josebazjr@hotmail.com · 📱 19 99166-0344</p>
+          </div>
+          <span class="tag tag-green" style="margin-left:auto;align-self:flex-start">Organização</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── TRELLO ─────────────────────────────────────────────────────── -->
+    <div class="section" id="sec-trello">
+      <h1 class="page-title">✅ Como usar o Trello</h1>
+
+      <div class="card info">
+        <div class="card-title">🔗 Link do board</div>
+        <p style="margin:6px 0 0"><a href="https://trello.com/b/DYlHKd9h/projeto-cgc30com" target="_blank">https://trello.com/b/DYlHKd9h/projeto-cgc30com</a></p>
+      </div>
+
+      <h2 class="sub">As 6 colunas</h2>
+      <div class="trello-cols">
+        <div class="tcol" style="border-top-color:#475569">
+          <h4>📋 Backlog</h4>
+          <p>Tudo que precisa ser feito, sem prazo definido. Qualquer membro pode adicionar ideias aqui.</p>
+        </div>
+        <div class="tcol" style="border-top-color:var(--navy)">
+          <h4>🎯 A Fazer</h4>
+          <p>Sprint atual. Máx. 2–3 cards por membro. O Coordenador move os cards nos alinhamentos.</p>
+        </div>
+        <div class="tcol" style="border-top-color:var(--teal)">
+          <h4>🔄 Em Andamento</h4>
+          <p>Você começou? Mova o card para cá e coloque seu nome.</p>
+        </div>
+        <div class="tcol" style="border-top-color:#CA8A04">
+          <h4>👀 Em Revisão</h4>
+          <p>Pronto, aguardando revisão do membro da área antes de ir para aprovação.</p>
+        </div>
+        <div class="tcol" style="border-top-color:#DC2626">
+          <h4>✅ Aprovação</h4>
+          <p>Aguardando aprovação final do Coordenador (Alicino). Só o membro da área move para cá.</p>
+        </div>
+        <div class="tcol" style="border-top-color:var(--green)">
+          <h4>🚀 Concluído</h4>
+          <p>Tarefa finalizada e publicada. Arquivado pelo Coordenador ao fim de cada fase.</p>
+        </div>
+      </div>
+
+      <h2 class="sub">Etiquetas por área</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:12px 0">
+        <span class="tag tag-navy">🔵 Tecnologia</span>
+        <span class="tag tag-purple">🟣 Comunicação</span>
+        <span class="tag tag-orange">🟠 Fotos e Mídia</span>
+        <span class="tag tag-green">🟢 Organização</span>
+        <span class="tag tag-yellow">🟡 Conteúdo e Artigos</span>
+        <span class="tag tag-red">🔴 Urgente</span>
+        <span class="tag tag-gray">⚫ Coordenação</span>
+      </div>
+
+      <h2 class="sub">Como criar um bom card</h2>
+      <table class="tbl">
+        <tr><th>Campo</th><th>Como preencher</th><th>Exemplo</th></tr>
+        <tr><td><strong>Título</strong></td><td>Verbo no infinitivo + entrega clara</td><td>"Escrever texto da seção Sobre o Capítulo"</td></tr>
+        <tr><td><strong>Descrição</strong></td><td>O que fazer, resultado esperado, onde entregar</td><td>"Salvar Google Doc na pasta /Conteúdo/Textos"</td></tr>
+        <tr><td><strong>Responsável</strong></td><td>Sempre um único nome</td><td>Rafael Alves</td></tr>
+        <tr><td><strong>Data</strong></td><td>Sempre definida, mesmo que estimada</td><td>30/06/2026</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Sub-etapas da tarefa</td><td>Rascunho → Revisão → Aprovação</td></tr>
+        <tr><td><strong>Etiqueta</strong></td><td>Pelo menos uma cor</td><td>🟣 Roxo (Comunicação)</td></tr>
+      </table>
+
+      <h2 class="sub">📌 Card LEIA-ME — Conteúdo do board</h2>
+      <p style="font-size:.85rem;color:var(--gray);margin-bottom:12px">Este é o conteúdo do card fixo que fica no topo do Backlog no Trello para orientar todos os membros.</p>
+
+      <!-- VERSÃO HTML FORMATADA -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px 28px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+
+        <p style="font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:4px">👋 Bem-vindo ao board do Projeto CGC30.com!</p>
+        <p style="font-size:.88rem;color:var(--gray);margin-bottom:20px">Este é o nosso painel de tarefas. Aqui organizamos tudo o que precisamos fazer para lançar o site oficial do Capítulo Grande Campinas n.30.</p>
+
+        <p style="font-size:.75rem;font-weight:700;color:var(--navy);letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px">🗂 O que é cada coluna?</p>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--bg);border-radius:8px;border-left:4px solid #475569">
+            <span style="font-size:1rem;flex-shrink:0">📋</span>
+            <div><strong style="color:var(--text)">Backlog</strong> <span style="color:var(--gray);font-size:.88rem">— Tudo que precisa ser feito, sem data ou dono definido. Qualquer membro pode adicionar ideias aqui.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--bg);border-radius:8px;border-left:4px solid var(--navy)">
+            <span style="font-size:1rem;flex-shrink:0">🎯</span>
+            <div><strong style="color:var(--text)">A Fazer (Sprint Atual)</strong> <span style="color:var(--gray);font-size:.88rem">— O que o time se comprometeu a fazer neste ciclo. Foque apenas nos cards desta coluna.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--bg);border-radius:8px;border-left:4px solid var(--teal)">
+            <span style="font-size:1rem;flex-shrink:0">🔄</span>
+            <div><strong style="color:var(--text)">Em Andamento</strong> <span style="color:var(--gray);font-size:.88rem">— Você começou a trabalhar? Mova o card para cá e coloque seu nome.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--bg);border-radius:8px;border-left:4px solid #CA8A04">
+            <span style="font-size:1rem;flex-shrink:0">👀</span>
+            <div><strong style="color:var(--text)">Em Revisão</strong> <span style="color:var(--gray);font-size:.88rem">— Tarefa pronta, aguardando revisão do membro da área.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--bg);border-radius:8px;border-left:4px solid #DC2626">
+            <span style="font-size:1rem;flex-shrink:0">✅</span>
+            <div><strong style="color:var(--text)">Aprovação (Alicino)</strong> <span style="color:var(--gray);font-size:.88rem">— Conteúdo revisado e pronto para aprovação final do Coordenador.</span></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--bg);border-radius:8px;border-left:4px solid var(--green)">
+            <span style="font-size:1rem;flex-shrink:0">🚀</span>
+            <div><strong style="color:var(--text)">Concluído</strong> <span style="color:var(--gray);font-size:.88rem">— Finalizado e publicado.</span></div>
+          </div>
+        </div>
+
+        <p style="font-size:.75rem;font-weight:700;color:var(--navy);letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px">🎨 Cores (etiquetas)</p>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px">
+          <span class="tag tag-navy">🔵 Tecnologia — Renan, Marcelo</span>
+          <span class="tag tag-purple">🟣 Comunicação — Rafael</span>
+          <span class="tag tag-orange">🟠 Fotos e Mídia — Ricardo</span>
+          <span class="tag tag-green">🟢 Organização — José</span>
+          <span class="tag tag-yellow">🟡 Conteúdo e Artigos</span>
+          <span class="tag tag-red">🔴 Urgente</span>
+          <span class="tag tag-gray">⚫ Coordenação</span>
+        </div>
+
+        <p style="font-size:.75rem;font-weight:700;color:var(--navy);letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px">✅ Regras básicas</p>
+        <ol style="padding-left:20px;font-size:.88rem;line-height:2;margin-bottom:20px;color:var(--text)">
+          <li>Cada card tem <strong>um único responsável</strong> — tarefa de ninguém é tarefa de ninguém.</li>
+          <li>Todo card precisa de <strong>data de entrega</strong>, mesmo que estimada.</li>
+          <li>Ao começar uma tarefa → mova para <strong>Em Andamento</strong>.</li>
+          <li>Ao terminar → mova para <strong>Em Revisão</strong> ou <strong>Aprovação</strong>.</li>
+          <li><strong>Nenhum conteúdo vai ao ar</strong> sem aprovação do Coordenador (Alicino).</li>
+          <li>Dúvidas rápidas? <strong>WhatsApp</strong>. Registro de progresso? <strong>Aqui no Trello</strong>.</li>
+        </ol>
+
+        <div style="background:var(--amber-bg);border-radius:8px;padding:12px 16px;font-size:.85rem;color:var(--amber)">
+          💬 Dúvidas? Fale com o Coordenador Alicino no WhatsApp.<br>
+          🔗 <a href="https://trello.com/b/DYlHKd9h/projeto-cgc30com" target="_blank">trello.com/b/DYlHKd9h/projeto-cgc30com</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── FERRAMENTAS ────────────────────────────────────────────────── -->
+    <div class="section" id="sec-ferramentas">
+      <h1 class="page-title">🛠 Ferramentas</h1>
+      <p>Todas as ferramentas são <strong>gratuitas</strong>. O acesso deve ser configurado durante a Fase 1.</p>
+
+      <div class="tools-grid">
+        <div class="tool-card">
+          <h4>✅ Trello</h4>
+          <p>Gestão de tarefas — board Kanban do projeto. Onde registramos tudo o que está sendo feito.</p>
+          <a href="https://trello.com/b/DYlHKd9h/projeto-cgc30com" target="_blank">Acessar o board →</a>
+        </div>
+        <div class="tool-card">
+          <h4>💻 GitHub</h4>
+          <p>Repositório do site. Deploy e versionamento. Uso principal: Renan e Marcelo.</p>
+          <a href="https://github.com/alicino/cgc30-landing" target="_blank">Ver repositório →</a>
+        </div>
+        <div class="tool-card">
+          <h4>🌐 Site (staging)</h4>
+          <p>Versão atual do site, onde testamos antes de publicar no domínio oficial.</p>
+          <a href="https://site.cgc30.com" target="_blank">Ver site.cgc30.com →</a>
+        </div>
+        <div class="tool-card">
+          <h4>📹 Google Meet</h4>
+          <p>Reuniões online quando necessário. Agendadas pelo Coordenador com link enviado pelo WhatsApp.</p>
+          <a href="https://meet.google.com" target="_blank">Acessar Google Meet →</a>
+        </div>
+        <div class="tool-card">
+          <h4>📁 Google Drive</h4>
+          <p>Armazenamento de conteúdo, fotos e documentos. Pasta compartilhada pelo Coordenador com todo o time.</p>
+          <a href="https://drive.google.com" target="_blank">Acessar Google Drive →</a>
+        </div>
+        <div class="tool-card">
+          <h4>📄 Google Docs</h4>
+          <p>Redação e revisão de textos e artigos. Colaboradores externos entregam o conteúdo aqui.</p>
+          <a href="https://docs.google.com" target="_blank">Acessar Google Docs →</a>
+        </div>
+        <div class="tool-card">
+          <h4>🔒 Cloudflare</h4>
+          <p>Acompanhamento de acessos ao site e dados de segurança. Monitoramento de tráfego, proteção contra ameaças e análise de visitas.</p>
+          <a href="https://dash.cloudflare.com" target="_blank">Acessar Cloudflare →</a>
+        </div>
+        <div class="tool-card">
+          <h4>💬 WhatsApp</h4>
+          <p>Comunicação rápida e atualizações do dia a dia. Grupo criado pelo Coordenador.</p>
+        </div>
+        <div class="tool-card">
+          <h4>📧 Email</h4>
+          <p>Comunicação formal com o Conselho ou parceiros externos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FLUXO ──────────────────────────────────────────────────────── -->
+    <div class="section" id="sec-fluxo">
+      <h1 class="page-title">🔄 Fluxo de Aprovação de Conteúdo</h1>
+
+      <div class="card danger">
+        <div class="card-title">🚨 Regra absoluta</div>
+        <p style="margin:6px 0 0">Nenhum conteúdo é publicado no site sem passar pela <strong>Etapa 5 — Aprovação do Coordenador</strong>. Sem exceções.</p>
+      </div>
+
+      <h2 class="sub">As 6 etapas</h2>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="num" style="background:var(--dark-navy)">1</div>
+            <div class="label">Identificação</div>
+            <div class="desc">Card criado no Trello</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="num" style="background:var(--navy)">2</div>
+            <div class="label">Recrutamento</div>
+            <div class="desc">Membro busca colaborador externo</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="num" style="background:var(--teal)">3</div>
+            <div class="label">Produção</div>
+            <div class="desc">Colaborador escreve no Google Docs</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="num" style="background:#CA8A04">4</div>
+            <div class="label">Revisão</div>
+            <div class="desc">Membro da área revisa o texto</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="num" style="background:#DC2626">5</div>
+            <div class="label">Aprovação</div>
+            <div class="desc">Alicino aprova o conteúdo final</div>
+          </div>
+          <div class="flow-arrow">→</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="num" style="background:var(--green)">6</div>
+            <div class="label">Publicação</div>
+            <div class="desc">Renan/Marcelo publicam via GitHub</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sub">Quem move o card no Trello?</h2>
+      <table class="tbl">
+        <tr><th>De</th><th>Para</th><th>Quem move</th><th>Quando</th></tr>
+        <tr><td>Backlog</td><td>A Fazer</td><td>Coordenador</td><td>No alinhamento quinzenal</td></tr>
+        <tr><td>A Fazer</td><td>Em Andamento</td><td>Membro</td><td>Quando começa a trabalhar</td></tr>
+        <tr><td>Em Andamento</td><td>Em Revisão</td><td>Membro</td><td>Quando a tarefa está pronta</td></tr>
+        <tr><td>Em Revisão</td><td>Aprovação</td><td>Membro da área</td><td>Após revisar internamente</td></tr>
+        <tr><td>Aprovação</td><td>Concluído</td><td>Coordenador</td><td>Após aprovação final</td></tr>
+        <tr><td>Aprovação</td><td>Em Andamento</td><td>Coordenador</td><td>Se precisar de ajustes (com comentário)</td></tr>
+      </table>
+    </div>
+
+    <!-- ── BRIEFING ───────────────────────────────────────────────────── -->
+    <div class="section" id="sec-briefing">
+      <h1 class="page-title">📝 Template de Briefing</h1>
+      <p>Use este gerador para criar o texto de recrutamento de colaboradores externos. Preencha os campos e copie a mensagem para enviar pelo WhatsApp.</p>
+
+      <div class="card" style="margin-bottom:24px">
+        <div class="form-field">
+          <label>Seu nome (membro do time)</label>
+          <input type="text" id="bf-membro" placeholder="Ex: Rafael Alves" />
+        </div>
+        <div class="form-field">
+          <label>Nome do colaborador</label>
+          <input type="text" id="bf-colab" placeholder="Ex: João Silva" />
+        </div>
+        <div class="form-field">
+          <label>Tema / o que precisa ser escrito</label>
+          <textarea id="bf-tema" placeholder="Ex: Sua experiência como DeMolay no Capítulo Grande Campinas n.30"></textarea>
+        </div>
+        <div class="form-field">
+          <label>Tópicos sugeridos (um por linha)</label>
+          <textarea id="bf-topicos" placeholder="Como você conheceu o DeMolay&#10;Uma memória marcante do Capítulo&#10;O que o DeMolay te ensinou"></textarea>
+        </div>
+        <div class="form-field">
+          <label>Tamanho esperado (palavras)</label>
+          <select id="bf-tamanho">
+            <option value="300 a 400">300 a 400 palavras (texto curto)</option>
+            <option value="400 a 500" selected>400 a 500 palavras (texto padrão)</option>
+            <option value="500 a 700">500 a 700 palavras (texto longo)</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Link do Google Doc para entrega</label>
+          <input type="text" id="bf-link" placeholder="https://docs.google.com/..." />
+        </div>
+        <div class="form-field">
+          <label>Prazo de entrega</label>
+          <input type="text" id="bf-prazo" placeholder="Ex: 15/06/2026" />
+        </div>
+        <button class="btn-generate" onclick="gerarBriefing()">✨ Gerar mensagem</button>
+      </div>
+
+      <div id="briefing-output">
+        <h2 class="sub">Mensagem gerada — copie e envie pelo WhatsApp</h2>
+        <div class="copybox">
+          <button class="copy-btn" onclick="copyText('briefing-text',this)">Copiar</button>
+          <pre id="briefing-text"></pre>
+        </div>
+      </div>
+
+      <h2 class="sub">Checklist antes de enviar para Aprovação</h2>
+      <div class="card">
+        <ul style="padding-left:20px;line-height:2;font-size:.9rem">
+          <li>Texto recebido no Google Docs dentro do prazo</li>
+          <li>Conteúdo em Português (Brasil), sem erros ortográficos</li>
+          <li>Tamanho adequado (nem muito curto, nem muito longo)</li>
+          <li>Conteúdo compatível com os valores do Capítulo</li>
+          <li>Sem informações incorretas ou que possam constranger alguém</li>
+          <li>Fotos mencionadas têm autorização de uso (especialmente menores de idade)</li>
+          <li>Link do Google Doc colado na descrição do card no Trello</li>
+          <li>Card movido para <strong>"✅ Aprovação (Alicino)"</strong> no Trello</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── CRONOLOGIA ──────────────────────────────────────────────────── -->
+    <div class="section" id="sec-cronologia">
+      <h1 class="page-title">📅 Cronologia</h1>
+
+      <div class="card info">
+        <div class="card-title">🗓 Meta de lançamento: <strong>17 de julho de 2026</strong></div>
+        <p style="margin:6px 0 0">O gráfico abaixo mostra as tarefas <strong>obrigatórias 🔴</strong> do Checklist, agrupadas por área, com os prazos estimados para o lançamento no prazo. Tarefas em vermelho são críticas — atraso nelas impacta a data final.</p>
+      </div>
+
+      <div style="margin:24px 0;overflow-x:auto;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+        <div class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#1B3A6B',
+  'primaryTextColor': '#1E293B',
+  'primaryBorderColor': '#0D1F3C',
+  'critBkgColor': '#DC2626',
+  'critBorderColor': '#991B1B',
+  'doneTaskBkgColor': '#166534',
+  'doneTaskBorderColor': '#14532D',
+  'activeTaskBkgColor': '#2E7D9D',
+  'activeTaskBorderColor': '#1B5E7B',
+  'taskTextColor': '#ffffff',
+  'taskTextOutsideColor': '#1E293B',
+  'taskTextLightColor': '#1E293B',
+  'todayLineColor': '#C9882E',
+  'sectionBkgColor': '#F0F4FA',
+  'altSectionBkgColor': '#E8F4FB',
+  'gridColor': '#CBD5E1',
+  'titleColor': '#1B3A6B',
+  'labelColor': '#1E293B',
+  'fontFamily': 'Segoe UI, system-ui, sans-serif',
+  'fontSize': '13px'
+}}}%%
+gantt
+    title Cronograma de Lançamento — CGC30.com
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%b
+
+    section Kick-off · Estruturação
+    Kick-off e onboarding do time        :done, e1, 2026-06-01, 2026-06-07
+
+    section Conteúdo · Textos
+    Página inicial e texto institucional :c1, 2026-06-08, 2026-06-20
+    Sobre o Capítulo e missão/valores    :c2, 2026-06-08, 2026-06-25
+    O que é o DeMolay                    :c3, 2026-06-15, 2026-06-30
+    Atividades com foto                  :c4, 2026-06-22, 2026-07-05
+    Como Participar e formulário         :c5, 2026-06-22, 2026-07-05
+
+    section Fotos e Mídia · Ricardo
+    Seleção e autorizações de fotos      :f1, 2026-06-08, 2026-06-22
+    Publicação das fotos no site         :f2, 2026-06-22, 2026-07-05
+
+    section Técnico · Renan
+    Testes de páginas e formulário       :t1, 2026-06-22, 2026-07-05
+    Responsividade e revisão técnica     :t2, 2026-07-01, 2026-07-10
+    Migração site.cgc30 para cgc30.com   :crit, t3, 2026-07-12, 2026-07-17
+
+    section Revisão · Todo o time
+    Revisão ortográfica e tom            :r1, 2026-07-01, 2026-07-10
+
+    section Aprovação e Lançamento
+    Aprovação final do conteúdo          :crit, a1, 2026-07-10, 2026-07-15
+    Comunicado redigido e aprovado       :l1, 2026-07-10, 2026-07-15
+    Lançamento oficial cgc30.com         :milestone, lc, 2026-07-17, 0d
+        </div>
+      </div>
+
+      <h2 class="sub">Legenda</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+        <span style="display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600">
+          <span style="display:inline-block;width:22px;height:14px;background:#1B3A6B;border-radius:3px;border:1px solid #0D1F3C"></span> Planejada
+        </span>
+        <span style="display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600">
+          <span style="display:inline-block;width:22px;height:14px;background:#2E7D9D;border-radius:3px;border:1px solid #1B5E7B"></span> Em andamento
+        </span>
+        <span style="display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600">
+          <span style="display:inline-block;width:22px;height:14px;background:#166534;border-radius:3px;border:1px solid #14532D"></span> Concluída
+        </span>
+        <span style="display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600">
+          <span style="display:inline-block;width:22px;height:14px;background:#DC2626;border-radius:3px;border:1px solid #991B1B"></span> Crítica — atraso afeta o lançamento
+        </span>
+        <span style="display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600">
+          <span style="display:inline-block;width:14px;height:14px;background:#C9882E;border-radius:2px;transform:rotate(45deg)"></span> Marco (milestone)
+        </span>
+      </div>
+
+      <div class="card warning">
+        <div class="card-title">⚠️ Pontos de atenção</div>
+        <ul style="padding-left:20px;margin-top:8px;line-height:2;font-size:.88rem">
+          <li><strong>01/06 — Kick-off:</strong> reunião de abertura com o time, alinhamento de responsabilidades e acesso às ferramentas.</li>
+          <li><strong>08/06:</strong> início simultâneo da produção de conteúdo e seleção de fotos — adicionar todos os colaboradores após o kick-off.</li>
+          <li><strong>01/07:</strong> revisão geral deve iniciar mesmo que alguns textos ainda estejam em ajuste final.</li>
+          <li><strong>10/07 (prazo limite):</strong> todo o conteúdo precisa estar em "Aprovação (Alicino)" no Trello.</li>
+          <li><strong>12/07:</strong> Renan inicia a migração de domínio — site pode ficar instável por algumas horas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── CHECKLIST ──────────────────────────────────────────────────── -->
+    <div class="section" id="sec-checklist">
+      <h1 class="page-title">🚀 Checklist de Lançamento</h1>
+      <p>Quando todos os itens <span class="priority-r">🔴 obrigatórios</span> estiverem marcados, o site está pronto para lançar em cgc30.com.</p>
+      <div class="card info" style="margin:12px 0">
+        <strong>Legenda:</strong>
+        <span class="priority-r">🔴 Obrigatório</span> — não lança sem este.
+        <span class="priority-y">🟡 Desejável</span> — importante, pode ser pós-lançamento.
+        <span class="priority-g">🟢 Bônus</span> — opcional para a versão inicial.
+      </div>
+
+      <div class="checklist-count" id="cl-count">0 de 0 itens concluídos</div>
+      <div class="checklist-progress"><div class="checklist-progress-bar" id="cl-bar" style="width:0%"></div></div>
+
+      <div id="checklist-container"></div>
+
+      <div class="card warning" style="margin-top:24px">
+        <div class="card-title">📌 Mínimo para lançar</div>
+        <p style="margin:8px 0 0">Se o prazo apertar, estes 6 itens são inegociáveis:</p>
+        <ol style="padding-left:20px;line-height:2;margin-top:8px;font-size:.9rem">
+          <li>Página inicial com texto e foto real do Capítulo</li>
+          <li>Página "Sobre o Capítulo" completa e aprovada</li>
+          <li>Página "Como Participar" com contato funcional</li>
+          <li>Nenhum texto de placeholder visível em nenhuma página</li>
+          <li>Site funcionando no domínio cgc30.com</li>
+          <li>Comunicado de lançamento enviado ao Capítulo</li>
+        </ol>
+      </div>
+    </div>
+
+
+  </main>
+</div><!-- #app -->
+
+<script>
+// ── HASH SHA-256 ─────────────────────────────────────────────────────────
+const HASH_CORRETO = "54409783a147d361ec65c3da034a116563ba6e2973ff81c57b56d929de0d4f82";
+
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+}
+
+// ── LOGIN / LOGOUT ───────────────────────────────────────────────────────
+async function doLogin() {
+  const pwd = document.getElementById("pwd").value;
+  const hash = await sha256(pwd);
+  if (hash === HASH_CORRETO) {
+    localStorage.setItem("cgc30_auth", "1");
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("app").classList.add("visible");
+    buildChecklist();
+  } else {
+    document.getElementById("login-error").style.display = "block";
+    document.getElementById("pwd").value = "";
+    document.getElementById("pwd").focus();
+  }
+}
+function doLogout() {
+  localStorage.removeItem("cgc30_auth");
+  location.reload();
+}
+
+// Auto-login se já autenticado
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("cgc30_auth") === "1") {
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("app").classList.add("visible");
+    buildChecklist();
+  }
+});
+
+// ── NAVEGAÇÃO ────────────────────────────────────────────────────────────
+let mermaidRendered = false;
+function show(id, el) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".nav-link").forEach(a => a.classList.remove("active"));
+  document.getElementById("sec-" + id).classList.add("active");
+  if (el) el.classList.add("active");
+  if (window.innerWidth <= 768) document.getElementById("sidebar").classList.remove("open");
+  window.scrollTo(0, 0);
+  if (id === "cronologia" && !mermaidRendered && typeof mermaid !== "undefined") {
+    mermaid.run({ nodes: document.querySelectorAll("#sec-cronologia .mermaid") }).then(() => {
+      setTimeout(() => {
+        const svgEl = document.querySelector("#sec-cronologia svg");
+        if (!svgEl) return;
+        const ns = "http://www.w3.org/2000/svg";
+
+        // ── 1. Marco dourado: injeta <style> direto no SVG ───────────────
+        const styleEl = document.createElementNS(ns, "style");
+        styleEl.textContent = [
+          ".milestone rect { fill: #C9882E !important; stroke: #92400E !important; }",
+          "g.milestone rect { fill: #C9882E !important; stroke: #92400E !important; }"
+        ].join(" ");
+        svgEl.appendChild(styleEl);
+        // Reforça via atributo + inline style
+        svgEl.querySelectorAll(".milestone rect").forEach(el => {
+          el.setAttribute("fill", "#C9882E");
+          el.setAttribute("stroke", "#92400E");
+          el.style.fill   = "#C9882E";
+          el.style.stroke = "#92400E";
+        });
+
+        // ── 2. Linhas verticais de início e fim ──────────────────────────
+        const chartH = svgEl.viewBox.baseVal.height
+                    || parseFloat(svgEl.getAttribute("height"))
+                    || svgEl.getBoundingClientRect().height
+                    || 500;
+
+        const firstTaskRect  = svgEl.querySelector("g.task:not(.milestone) rect");
+        const milestoneGroup = svgEl.querySelector("g.milestone");
+        const milestoneRect  = milestoneGroup ? milestoneGroup.querySelector("rect") : null;
+
+        function drawMarker(x, color, label) {
+          // Linha tracejada
+          const line = document.createElementNS(ns, "line");
+          line.setAttribute("x1", x);  line.setAttribute("x2", x);
+          line.setAttribute("y1", "0"); line.setAttribute("y2", chartH);
+          line.setAttribute("stroke", color);
+          line.setAttribute("stroke-width", "2");
+          line.setAttribute("stroke-dasharray", "7,4");
+          line.setAttribute("opacity", "0.9");
+          svgEl.insertBefore(line, svgEl.firstChild); // atrás de tudo
+
+          // Rótulo da data
+          const txt = document.createElementNS(ns, "text");
+          txt.setAttribute("x", x + 5);
+          txt.setAttribute("y", "20");
+          txt.setAttribute("fill", color);
+          txt.setAttribute("font-size", "12");
+          txt.setAttribute("font-weight", "700");
+          txt.setAttribute("font-family", "Segoe UI, system-ui, sans-serif");
+          txt.textContent = label;
+          svgEl.appendChild(txt);
+        }
+
+        if (firstTaskRect) {
+          drawMarker(parseFloat(firstTaskRect.getAttribute("x")), "#2E7D9D", "01/Jun — Início");
+        }
+        if (milestoneRect) {
+          const cx = parseFloat(milestoneRect.getAttribute("x"))
+                   + parseFloat(milestoneRect.getAttribute("width")) / 2;
+          drawMarker(cx, "#C9882E", "17/Jul — Lançamento");
+        }
+      }, 150);
+    });
+    mermaidRendered = true;
+  }
+  return false;
+}
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+// ── COPIAR TEXTO ─────────────────────────────────────────────────────────
+function copyText(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = "✓ Copiado!";
+    btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "Copiar"; btn.classList.remove("copied"); }, 2000);
+  });
+}
+
+// ── GERADOR DE BRIEFING ──────────────────────────────────────────────────
+function gerarBriefing() {
+  const membro  = document.getElementById("bf-membro").value  || "[Seu nome]";
+  const colab   = document.getElementById("bf-colab").value   || "[Nome do colaborador]";
+  const tema    = document.getElementById("bf-tema").value    || "[Tema a ser escrito]";
+  const tamanho = document.getElementById("bf-tamanho").value;
+  const link    = document.getElementById("bf-link").value    || "[Link do Google Doc]";
+  const prazo   = document.getElementById("bf-prazo").value   || "[DD/MM/AAAA]";
+  const topicos = document.getElementById("bf-topicos").value
+    .split("\n").filter(t => t.trim()).map(t => `  - ${t.trim()}`).join("\n") || "  - [Tópico sugerido]";
+
+  const msg = `Olá, ${colab}! Tudo bem?
+
+Sou ${membro}, membro do Capítulo Grande Campinas n.30. Estamos trabalhando no lançamento do nosso site oficial — cgc30.com — e gostaria de contar com a sua ajuda para produzir um conteúdo muito especial.
+
+*O que é o projeto?*
+Estamos atualizando o site do Capítulo com informações reais, fotos e histórias autênticas. O objetivo é que qualquer pessoa possa acessar o site e entender quem somos e o que fazemos.
+
+*O que precisamos de você?*
+Gostaríamos que você escrevesse sobre:
+${tema}
+
+*Tópicos sugeridos:*
+${topicos}
+
+*Orientações:*
+- Tamanho: entre ${tamanho} palavras
+- Tom: informal e acolhedor, como se contasse para um amigo
+- Idioma: Português (Brasil)
+- Não precisa ser perfeito — nosso time vai revisar antes de publicar
+
+*Como entregar:*
+Escreva no Google Docs usando este link: ${link}
+Quando terminar, é só me avisar por aqui.
+
+*Prazo:* até ${prazo}
+
+Qualquer dúvida pode me perguntar à vontade. Muito obrigado pela sua contribuição! 🤝
+
+${membro}`;
+
+  document.getElementById("briefing-text").textContent = msg;
+  document.getElementById("briefing-output").style.display = "block";
+  document.getElementById("briefing-output").scrollIntoView({ behavior: "smooth" });
+}
+
+// ── CHECKLIST ────────────────────────────────────────────────────────────
+const CHECKLIST_DATA = [
+  { section: "1. Conteúdo das Páginas", items: [
+    { id:"c01", p:"r", label:"Página inicial: título e slogan em Português (Brasil)" },
+    { id:"c02", p:"r", label:"Página inicial: texto real sobre o Capítulo (não ilustrativo)" },
+    { id:"c03", p:"r", label:"Página inicial: pelo menos uma foto real do Capítulo" },
+    { id:"c04", p:"y", label:"Página inicial: chamada para ação clara (Faça parte, Saiba mais)" },
+    { id:"c05", p:"r", label:"Sobre o Capítulo: texto institucional real e correto" },
+    { id:"c06", p:"r", label:"Sobre o Capítulo: missão, visão e valores revisados por Alexandre Lins" },
+    { id:"c07", p:"y", label:"Sobre o Capítulo: breve história com referências do acervo de Ricardo" },
+    { id:"c08", p:"r", label:"O que é o DeMolay: texto explicativo em linguagem acessível" },
+    { id:"c09", p:"r", label:"Atividades: pelo menos 2 eventos reais descritos com foto" },
+    { id:"c10", p:"r", label:"Como Participar: informações reais de ingresso e formulário funcional" },
+    { id:"c11", p:"r", label:"Contato: e-mail ou formulário testado e funcionando" },
+  ]},
+  { section: "2. Fotos e Mídia", items: [
+    { id:"c12", p:"r", label:"Nenhuma foto ilustrativa (stock photo) nas páginas principais" },
+    { id:"c13", p:"r", label:"Pelo menos 5 fotos reais do Capítulo publicadas" },
+    { id:"c14", p:"r", label:"Todas as fotos em resolução adequada para web (mín. 800px)" },
+    { id:"c15", p:"r", label:"Fotos com menores de idade: autorização dos responsáveis confirmada" },
+    { id:"c16", p:"y", label:"Fotos otimizadas para carregamento rápido" },
+    { id:"c17", p:"g", label:"Galeria histórica criada com fotos do acervo de Ricardo (desde 2010)" },
+  ]},
+  { section: "3. Revisão de Texto", items: [
+    { id:"c18", p:"r", label:"Todo o conteúdo em Português (Brasil) — sem placeholder ou inglês" },
+    { id:"c19", p:"r", label:'Nenhum texto com "[inserir conteúdo]", "Lorem ipsum" ou similar' },
+    { id:"c20", p:"r", label:"Revisão ortográfica feita em todas as páginas" },
+    { id:"c21", p:"r", label:"Tom de comunicação consistente em todo o site" },
+    { id:"c22", p:"y", label:"Alexandre Lins revisou os textos institucionais" },
+  ]},
+  { section: "4. Técnico (Renan Pinheiro)", items: [
+    { id:"c23", p:"r", label:"Site funcionando corretamente em site.cgc30.com" },
+    { id:"c24", p:"r", label:"Todas as páginas carregando sem erros e sem links quebrados" },
+    { id:"c25", p:"r", label:"Formulário de contato testado — envio e recebimento funcionando" },
+    { id:"c26", p:"r", label:"Site responsivo: testado em celular e computador" },
+    { id:"c27", p:"r", label:"Migração do domínio: site.cgc30.com → cgc30.com executada por Renan" },
+    { id:"c28", p:"y", label:"Certificado SSL ativo (https:// com cadeado no navegador)" },
+    { id:"c29", p:"y", label:"Site testado nos principais navegadores: Chrome, Safari, Firefox" },
+  ]},
+  { section: "5. Aprovação Final (Alicino Moura)", items: [
+    { id:"c30", p:"r", label:"Coordenador revisou e aprovou o conteúdo de todas as páginas" },
+    { id:"c31", p:"r", label:"Nenhum conteúdo pendente na coluna Aprovação do Trello" },
+    { id:"c32", p:"r", label:"Data e hora do lançamento definidas e comunicadas ao time" },
+  ]},
+  { section: "6. Comunicação (Rafael Alves)", items: [
+    { id:"c33", p:"r", label:"Comunicado oficial de lançamento redigido e aprovado por Alicino" },
+    { id:"c34", p:"r", label:"Comunicado enviado para o grupo de WhatsApp do Capítulo" },
+    { id:"c35", p:"y", label:"Post de lançamento criado para as redes sociais do Capítulo" },
+    { id:"c36", p:"y", label:"Alexandre Lins comunicou o lançamento ao Conselho Consultivo" },
+  ]},
+];
+
+function buildChecklist() {
+  const container = document.getElementById("checklist-container");
+  container.innerHTML = "";
+  CHECKLIST_DATA.forEach(section => {
+    const sec = document.createElement("div");
+    sec.className = "checklist-section";
+    sec.innerHTML = `<h3>${section.section}</h3>`;
+    section.items.forEach(item => {
+      const checked = localStorage.getItem("cl_" + item.id) === "1";
+      const div = document.createElement("div");
+      div.className = "check-item" + (checked ? " done" : "");
+      div.id = "wrap-" + item.id;
+      const pLabel = item.p === "r"
+        ? `<span class="priority-r">🔴</span>`
+        : item.p === "y"
+        ? `<span class="priority-y">🟡</span>`
+        : `<span class="priority-g">🟢</span>`;
+      div.innerHTML = `
+        <input type="checkbox" id="${item.id}" ${checked ? "checked" : ""}
+               onchange="toggleCheck('${item.id}', this.checked)" />
+        <label for="${item.id}">${item.label} ${pLabel}</label>`;
+      sec.appendChild(div);
+    });
+    container.appendChild(sec);
+  });
+  updateProgress();
+}
+
+function toggleCheck(id, checked) {
+  localStorage.setItem("cl_" + id, checked ? "1" : "0");
+  const wrap = document.getElementById("wrap-" + id);
+  if (checked) wrap.classList.add("done"); else wrap.classList.remove("done");
+  updateProgress();
+}
+
+function updateProgress() {
+  const all = CHECKLIST_DATA.flatMap(s => s.items);
+  const total = all.length;
+  const done  = all.filter(i => localStorage.getItem("cl_" + i.id) === "1").length;
+  document.getElementById("cl-count").textContent = `${done} de ${total} itens concluídos`;
+  document.getElementById("cl-bar").style.width = (done / total * 100) + "%";
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    gantt: {
+      barHeight: 24,
+      barGap: 6,
+      topPadding: 50,
+      leftPadding: 200,
+      rightPadding: 80,
+      fontSize: 13
+    }
+  });
+</script>
+</body>
+</html>
