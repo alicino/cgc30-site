@@ -1,0 +1,18 @@
+---
+slug: como-me-tornei-mc-e-mcr
+title: "Como me Tornei Mestre Conselheiro e Mestre Conselheiro Regional"
+author: "Ir. Paulo Anderaus"
+date: "28 Mai, 2026"
+summary: "A trajetória como membro da Ordem DeMolay sendo Mestre Conselheiro e Mestre Conselheiro Regional"
+tags: ["experiência", "ensinamento", "cargos"]
+---
+
+   Quando reflito sobre minha jornada na Ordem DeMolay, principalmente pensando nos cargos de liderança explícita ocupados (Mestre Conselheiro e Mestre Conselheiro Regional), é impossível não relembrar os momentos iniciais desse percurso. Ingressei na Ordem em 2023, após preencher o formulário “O Caminho Começa Aqui” do nosso Supremo Conselho, em um processo que (concomitantemente ao ingresso na faculdade) me trouxe de Volta Redonda (interior do Estado do Rio de Janeiro) para Campinas. Desde o início de minha caminhada nesta Instituição, sempre a enxerguei como uma oportunidade de servir melhor à sociedade — visão esta que implantou, logo após a Iniciação, em meu coração um forte propósito de trabalhar como Mestre Conselheiro do Capítulo. E, diga-se de passagem, servir como Mestre Conselheiro foi uma das melhores experiências de minha jornada — esta que se perfaz agora com a conclusão de meu mandato de Mestre Conselheiro Regional (cargo este que optei por concorrer com o objetivo central de poder engendrar em toda a 3ª Região deste Grande Conselho o espírito de união e continuidade que vivenciei enquanto Mestre Conselheiro). Dito isto, gostaria de colocar, de uma forma um tanto poética, as lições que aprendi nesta distinta Organização:
+
+   Se me foram apresentados na tenra idade a importância e necessidade do ato de servir e acerca do valor e cuidado que se deve cultivar pelo sagrado e pela natureza, então foi graças à Ordem DeMolay que me reacendeu essa chama, pondo-me ainda diante de mais sete grandes luzes (para serem guias de meus discernimentos práticos) e de três nobres baluartes (como objetos eternos e dignos das mais ilustres linhas de defesa), que hoje posso dizer: “Eu aprendi e aprendo a servir; cultivar e respeitar o que é sagrado; lutar pela manutenção e existência profícua da natureza e de tudo o que é vivo”!
+
+   Se no colégio percebi a importância da educação e, além disso, o fato de que somos eternos aprendizes, então foi na graça e sob a égide dessa formosa Ordem que vi exemplos de sujeitos que, cruzando o meio-dia de suas vidas, passando de estudantes ativos para “alumnis”, mantiveram-se na mesma instância humilde do aprendizado. Tal que, com isso, posso afirmar: "Eu aprendi e aprendo que a linha tênue entre ensinar e ser ensinado torna-se apenas uma lembrança quando se vê um digno exemplo de contínuo humilde aprendiz"!
+
+   Se tive e tenho grandes e verdadeiros amigos, irmãos, então foi nessa magnífica Instituição que, apresentando-me a imagem e memória de verdadeiros exemplos de companheirismo e fidelidade, ensina-me juntamente ao Pai Celestial, a inevitável lição da Fraternidade universal. E isto me possibilita proclamar: “Eu aprendi e aprendo que sou, também, irmão de todos os indefesos, de todos os que sofrem, encontrando alegria no serviço ao próximo e no auxílio e consolo aos doentes e aos que estão tristes”!...
+
+   Enfim, com isso encerro minhas palavras e deixo aqui os meus mais nobres agradecimentos a todos aqueles que, com verdadeiro espírito de fraternidade, trabalharam e trabalham em prol do engrandecimento desta Ordem extraordinária, nos permitindo vislumbrar hoje, no Brasil, os mais de 45 anos de um indescritível fluxo de contos, histórias, feitos e memórias, cuja transmissão de seus detalhes e auroras, no que puder depender de mim, nunca chegará ao fim.

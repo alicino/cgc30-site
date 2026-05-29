@@ -19,7 +19,8 @@ export const ARTICLES = [
     summary: 'Explorando a primeira e principal virtude DeMolay e como ela molda o caráter dos nossos jovens em Campinas.',
     date: '15 Mai, 2024',
     author: 'Ir. João Silva',
-    url: '#'
+    url: '/artigos/amor-filial',
+    internal: true
   },
   {
     id: 2,

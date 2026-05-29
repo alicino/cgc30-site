@@ -1,4 +1,49 @@
 
-# Bootstrap marker
+# ─── Bootstrap ────────────────────────────────────────────────────────────────
 .bootstrap-complete
-node_modules
+
+# ─── Dependências ─────────────────────────────────────────────────────────────
+node_modules/
+
+# ─── Build e cache ────────────────────────────────────────────────────────────
+dist/
+.vite/
+*.tsbuildinfo
+.wrangler/
+
+# ─── Variáveis de ambiente ────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ─── Documentação interna (não versionar) ─────────────────────────────────────
+# Estes arquivos contêm contexto de projeto, decisões técnicas e planejamento
+# interno. Mantenha-os locais e compartilhe por outros meios quando necessário.
+CLAUDE.md
+PRD.md
+SDD.md
+TDD.md
+docs/
+prompts/
+
+# ─── Gerado automaticamente pelo build script ─────────────────────────────────
+# Descomente a linha abaixo SE o GitHub Actions estiver configurado para rodar
+# `npm run build` antes do deploy — nesse caso, o arquivo é gerado em CI.
+# Se não houver CI, mantenha comentado e commite o arquivo junto com o .md.
+# src/generated/
+
+# ─── Sistema operacional ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDEs e editores ──────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*

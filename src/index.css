@@ -59,4 +59,44 @@
   .glass-nav {
     @apply sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md;
   }
+
+  /* ─── Estilos para HTML gerado pelo build-articles.mjs ─── */
+  .article-content {
+    @apply text-foreground leading-relaxed;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .article-content p {
+    @apply mb-6 text-foreground/90;
+  }
+  .article-content h2 {
+    @apply font-playfair font-bold text-2xl mt-12 mb-4 text-foreground;
+  }
+  .article-content h3 {
+    @apply font-playfair font-semibold text-xl mt-8 mb-3 text-foreground;
+  }
+  .article-content strong {
+    @apply font-semibold text-foreground;
+  }
+  .article-content em {
+    @apply italic;
+  }
+  .article-content blockquote {
+    @apply border-l-4 border-primary bg-primary/5 rounded-r-lg px-6 py-4 my-8;
+  }
+  .article-content blockquote p {
+    @apply text-lg font-medium italic text-foreground mb-2;
+  }
+  .article-content blockquote footer {
+    @apply text-sm text-muted-foreground not-italic;
+  }
+  .article-content ul {
+    @apply list-disc pl-6 mb-6 space-y-2;
+  }
+  .article-content li {
+    @apply text-foreground/90;
+  }
+  .article-content code {
+    @apply font-mono text-sm bg-muted px-1.5 py-0.5 rounded;
+  }
 }

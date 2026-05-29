@@ -18,6 +18,7 @@ import { DownloadsPage } from '@/pages/DownloadsPage';
 import { ArtigosPage } from '@/pages/ArtigosPage';
 import { CalendarioPage } from '@/pages/CalendarioPage';
 import { SobrePage } from '@/pages/SobrePage';
+import { ArtigoPage } from '@/pages/ArtigoPage';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "/galeria", element: <GaleriaPage /> },
       { path: "/downloads", element: <DownloadsPage /> },
       { path: "/artigos", element: <ArtigosPage /> },
+      { path: "/artigos/:slug", element: <ArtigoPage /> },
       { path: "/calendario", element: <CalendarioPage /> },
       { path: "/sobre", element: <SobrePage /> },
     ]
