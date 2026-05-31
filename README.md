@@ -1,7 +1,5 @@
 # Portal Institucional
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/alicino-m/cgc30-build)
-
 A production-ready fullstack application built on Cloudflare Workers and Pages. Features a modern React frontend with shadcn/ui components, Tailwind CSS, API routes powered by Hono, and seamless deployment to Cloudflare's global edge network.
 
 ## Features
@@ -24,6 +22,7 @@ A production-ready fullstack application built on Cloudflare Workers and Pages. 
 | **Backend** | Hono, Cloudflare Workers |
 | **Utilities** | Zod (validation), Immer (state), clsx/twMerge (styling), uuid |
 | **Dev Tools** | Bun, ESLint, TypeScript ESLint |
+| **Artigos Session**| Astro | 
 
 ## Quick Start
 
@@ -115,10 +114,6 @@ This builds the app and deploys via Wrangler. Ensure you're logged in:
 npx wrangler login
 ```
 
-Configure your Cloudflare account and zone in `wrangler.toml` if needed.
-
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/alicino-m/cgc30-build)
-
 ## Scripts
 
 | Script | Description |
@@ -149,7 +144,3 @@ Configure your Cloudflare account and zone in `wrangler.toml` if needed.
 2. Create a feature branch (`bun dev`).
 3. Commit changes (`git commit -m "feat: ..."`).
 4. Push and open a PR.
-
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
