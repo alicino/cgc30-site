@@ -43,9 +43,9 @@ export function SobrePage() {
         </div>
         <div className="mb-20">
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-12">As 7 Virtudes Cardeais</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {VIRTUES.map((v) => (
-              <div key={v.name} className="p-6 rounded-2xl bg-muted/50 border space-y-3 hover:bg-accent transition-colors">
+              <div key={v.name} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] p-6 rounded-2xl bg-muted/50 border space-y-3 hover:bg-accent transition-colors">
                 <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                   <v.icon className="h-5 w-5" />
                 </div>
@@ -62,18 +62,18 @@ export function SobrePage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { role: 'Mestre Conselheiro', img: '1' },
-              { role: '1º Conselheiro', img: '2' },
-              { role: '2º Conselheiro', img: '3' },
-              { role: 'Presidente do Conselho', img: '4' }
+              { role: 'Mestre Conselheiro', img: '/images/lideranca/mcons.jpg' },
+              { role: '1º Conselheiro', img: '/images/lideranca/1cons.jpg' },
+              { role: '2º Conselheiro', img: '/images/lideranca/2cons.jpg' },
+              { role: 'Presidente do Conselho', img: '/images/lideranca/pcons.jpg' }
             ].map((leader, i) => (
               <div key={i} className="space-y-4">
                 <div className="aspect-square rounded-full overflow-hidden border-4 border-background shadow-lg grayscale hover:grayscale-0 transition-all">
-                  <img src={`https://i.pravatar.cc/300?img=${i+15}`} alt={leader.role} className="object-cover w-full h-full" />
+                  <img src={leader.img} alt={leader.role} className="object-cover w-full h-full" />
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">{leader.role}</h4>
-                  <p className="text-sm text-muted-foreground">Gestão 2024.1</p>
+                  <p className="text-sm text-muted-foreground">Gestão 2026.2</p>
                 </div>
               </div>
             ))}

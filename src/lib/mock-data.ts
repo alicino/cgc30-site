@@ -39,29 +39,119 @@ export const ARTICLES = [
     url: '#'
   }
 ];
+// Fonte de verdade: /prompts/calendario_LXXXIV.md (Cronograma de sessões e eventos da LXXXIV Gestão)
+// type = coluna "Tipo", title = coluna "Descrição" (nome da reunião), date = coluna "Data" (DD/MM/AAAA)
 export const EVENTS = [
   {
     id: 1,
-    title: 'Cerimônia de Iniciação',
-    date: '22 de Junho, 2024',
-    time: '15:00 - 19:00',
-    location: 'Templo Maçônico de Campinas',
-    description: 'Boas-vindas aos novos membros que ingressam na nossa fraternidade.'
+    type: 'Pública',
+    title: 'Instalação de oficiais, da nova gestão LXXXIV.',
+    date: '02/08/2026',
+    time: '9h',
+    location: 'Loja Constância'
   },
   {
     id: 2,
-    title: 'Workshop de Liderança Juvenil',
-    date: '15 de Julho, 2024',
-    time: '09:00 - 17:00',
-    location: 'Sala de Conferências - Centro',
-    description: 'Treinamento intensivo sobre oratória, gestão de tempo e liderança de equipes.'
+    type: 'Ordinária',
+    title: 'Reunião de exposição do calendário da gestão LXXXIV Gestão Administrativa',
+    date: '16/08/2026',
+    time: '9h',
+    location: 'Loja Constância'
   },
   {
     id: 3,
-    title: 'Ação Social: Agasalho Solidário',
-    date: '03 de Agosto, 2024',
-    time: '08:00 - 14:00',
-    location: 'Praça Bento Quirino',
-    description: 'Arrecadação e distribuição de agasalhos para famílias em situação de vulnerabilidade.'
+    type: 'Pública',
+    title: 'Cerimônia Pública em Homenagem aos Pais e Cerimônia de Maioridade.',
+    date: '23/08/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 4,
+    type: 'Ordinária',
+    title: 'Escrutínio para entrada de novos membros e Palestra de tema: "A Pátria Brasileira", ministrada pelo Irmão Paulo Anderaus.',
+    date: '06/09/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 5,
+    type: 'Ordinária',
+    title: 'Palestra acerca do Tema Anual do SCDB.',
+    date: '13/09/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 6,
+    type: 'Ordinária',
+    title: 'Iniciação ao Grau Iniciático',
+    date: '20/09/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 7,
+    type: 'Pública',
+    title: "Investidura ao Grau de Chevalier do irmão Gustavo D'Abruzzo.",
+    date: '04/10/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 8,
+    type: 'A Definir',
+    title: 'A Definir',
+    date: '11/10/2026',
+    time: 'A Definir',
+    location: 'A Definir'
+  },
+  {
+    id: 9,
+    type: 'Ordinária',
+    title: 'Palestra ministrada pelo tio Cezar Velardez.',
+    date: '18/10/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 10,
+    type: 'Administrativa',
+    title: 'Apresentação dos trabalhos dos irmãos Iniciáticos',
+    date: '25/10/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 11,
+    type: 'Ordinária',
+    title: 'Exame de Proficiência do Grau Iniciático + Palestra ministrada pelo Irmão Juan Velardez sobre F. S. Land',
+    date: '08/11/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 12,
+    type: 'Ordinária',
+    title: 'Iniciação ao Grau DeMolay',
+    date: '29/11/2026',
+    time: '9h',
+    location: 'Loja Constância'
+  },
+  {
+    id: 13,
+    type: 'Evento',
+    title: 'Evento de Arrecadação da Gestão.',
+    date: '05/12/2026',
+    time: 'A Definir',
+    location: 'A Definir'
+  },
+  {
+    id: 14,
+    type: 'Ordinária',
+    title: 'Eleição da LXXXV Gestão Administrativa',
+    date: '13/12/2026',
+    time: '9h',
+    location: 'Loja Constância'
   }
 ];

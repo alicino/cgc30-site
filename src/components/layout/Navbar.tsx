@@ -24,8 +24,8 @@ export function Navbar() {
           <Link to="/" className="flex items-center gap-2 group">
             <img src={demolayLogo} alt="Capítulo Grande Campinas nº 30" className="h-12 md:h-14 w-auto object-contain transition-transform group-hover:scale-105" />
             <div className="flex flex-col">
-              <span className="font-playfair text-lg font-bold leading-none tracking-tight">Grande Campinas</span>
-              <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Capítulo nº 30</span>
+              <span className="font-playfair text-lg font-bold leading-none tracking-tight">Grande Campinas n.30</span>
+              <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Ordem DeMolay</span>
             </div>
           </Link>
           {/* Desktop Nav */}
