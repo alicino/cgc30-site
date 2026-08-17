@@ -19,11 +19,13 @@ dist/
 # ─── Documentação interna (não versionar) ─────────────────────────────────────
 # Estes arquivos contêm contexto de projeto, decisões técnicas e planejamento
 # interno. Mantenha-os locais e compartilhe por outros meios quando necessário.
+# Observação: "/docs/" é ancorado na raiz para NÃO capturar public/docs/,
+# que contém PDFs públicos do site (seção /downloads).
 CLAUDE.md
 PRD.md
 SDD.md
 TDD.md
-docs/
+/docs/
 prompts/
 
 # ─── Gerado automaticamente pelo build script ─────────────────────────────────

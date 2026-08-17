@@ -4,12 +4,17 @@ import { DOWNLOAD_FILES } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { toast } from 'sonner';
+function parseDate(date: string) {
+  const [day, month, year] = date.split('/').map(Number);
+  return new Date(year, month - 1, day).getTime();
+}
 export function DownloadsPage() {
   const handleDownload = (fileName: string) => {
     toast.success("Download iniciado", {
       description: `O arquivo "${fileName}" está sendo baixado.`
     });
   };
+  const sortedFiles = [...DOWNLOAD_FILES].sort((a, b) => parseDate(b.date) - parseDate(a.date));
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="py-8 md:py-10 lg:py-12">
@@ -20,7 +25,7 @@ export function DownloadsPage() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {DOWNLOAD_FILES.map((file) => (
+          {sortedFiles.map((file) => (
             <Card key={file.id} className="flex flex-col md:flex-row md:items-center hover:bg-accent/5 transition-colors border-l-4 border-l-primary group">
               <div className="p-6 flex items-center justify-center">
                 <div className="p-4 rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
@@ -37,12 +42,20 @@ export function DownloadsPage() {
                 </CardHeader>
               </div>
               <CardFooter className="p-6 pt-0 md:pt-6">
-                <Button 
-                  onClick={() => handleDownload(file.name)}
-                  className="w-full md:w-auto gap-2"
-                >
-                  <Download className="h-4 w-4" /> Baixar
-                </Button>
+                {file.url ? (
+                  <Button asChild className="w-full md:w-auto gap-2">
+                    <a href={file.url} download rel="noopener noreferrer">
+                      <Download className="h-4 w-4" /> Baixar
+                    </a>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => handleDownload(file.name)}
+                    className="w-full md:w-auto gap-2"
+                  >
+                    <Download className="h-4 w-4" /> Baixar
+                  </Button>
+                )}
               </CardFooter>
             </Card>
           ))}

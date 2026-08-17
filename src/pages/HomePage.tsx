@@ -25,9 +25,9 @@ export function HomePage() {
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="absolute inset-0 z-0"
         >
-          <img 
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600" 
-            alt="Jovens em atividade de liderança"
+          <img
+            src="/images/home/landing-hero.jpeg"
+            alt="Membros do Capítulo Grande Campinas nº 30"
             className="w-full h-full object-cover object-center"
           />
         </motion.div>
@@ -50,7 +50,7 @@ export function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="font-playfair font-bold text-5xl md:text-7xl lg:text-8xl text-white leading-tight tracking-tight"
+              className="font-playfair font-bold text-4xl md:text-6xl lg:text-7xl text-white leading-tight tracking-tight"
             >
               Capítulo Grande <br className="hidden md:block" />
               Campinas <span className="text-secondary">nº 30</span>

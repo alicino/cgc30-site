@@ -1,16 +1,18 @@
 export const GALLERY_IMAGES = [
-  { id: 1, url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800', alt: 'Reunião de Jovens Líderes' },
-  { id: 2, url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800', alt: 'Trabalho em Equipe e Fraternidade' },
-  { id: 3, url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800', alt: 'Desenvolvimento de Caráter' },
-  { id: 4, url: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=800', alt: 'Atividade de Liderança Juvenil' },
-  { id: 5, url: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800', alt: 'Projetos Sociais do Capítulo' },
-  { id: 6, url: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?q=80&w=800', alt: 'Encontro de Membros' },
+  { id: 1, url: '/images/galeria/boteco-demolay.jpeg', alt: 'Boteco DeMolay' },
+  { id: 2, url: '/images/galeria/desfile-7-setembro-2025.jpeg', alt: 'Desfile de 7 de Setembro' },
+  { id: 3, url: '/images/galeria/familia-cgc30.jpeg', alt: 'A Família Grande Campinas' },
+  { id: 4, url: '/images/galeria/evento-capitular.jpeg', alt: 'Evento Capitular' },
+  { id: 5, url: '/images/galeria/foto-apos-reuniao.jpeg', alt: 'Fotos após Reunião' },
+  { id: 6, url: '/images/galeria/jantar-40-anos.jpeg', alt: 'Comemoração 40 anos Capítulo' },
 ];
 export const DOWNLOAD_FILES = [
-  { id: 1, name: 'Estatuto Social do Capítulo', size: '2.4 MB', format: 'PDF', date: '10/02/2024' },
-  { id: 2, name: 'Guia do Iniciático 2024', size: '5.1 MB', format: 'PDF', date: '05/01/2024' },
-  { id: 3, name: 'Ficha de Inscrição de Membro', size: '0.8 MB', format: 'PDF', date: '20/03/2024' },
-  { id: 4, name: 'Calendário de Virtudes Semestral', size: '1.5 MB', format: 'PDF', date: '12/03/2024' },
+  { id: 1, name: 'Estatuto Social do Capítulo', size: '2.4 MB', format: 'PDF', date: '10/02/2024', url: '' },
+  { id: 2, name: 'Guia do Iniciático 2024', size: '5.1 MB', format: 'PDF', date: '05/01/2024', url: '' },
+  { id: 3, name: 'Ficha de Inscrição de Membro', size: '0.8 MB', format: 'PDF', date: '20/03/2024', url: '' },
+  { id: 4, name: 'Calendário de Virtudes Semestral', size: '1.5 MB', format: 'PDF', date: '12/03/2024', url: '' },
+  { id: 5, name: 'Significado do Estandarte do Capítulo', size: '1 MB', format: 'PDF', date: '31/05/2025', url: '/docs/estandarte-cgc30.pdf' },
+  { id: 6, name: 'Plano Pedagógico do Supremo Conselho', size: '3 MB', format: 'PDF', date: '19/09/2025', url: '/docs/DOC-20250919-WA0084.pdf' },
 ];
 export const ARTICLES = [
   {

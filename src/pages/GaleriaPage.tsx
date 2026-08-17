@@ -12,6 +12,17 @@ export function GaleriaPage() {
           <p className="text-muted-foreground text-lg max-w-2xl">
             Registros visuais das nossas reuniões, cerimônias ritualísticas e atividades de lazer que fortalecem nossos laços fraternais.
           </p>
+          <p className="text-muted-foreground text-lg max-w-2xl mt-2">
+            Para ver mais fotos acesse nosso{' '}
+            <a
+              href="https://www.instagram.com/cgc_30/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary font-medium underline underline-offset-4 hover:text-primary/80"
+            >
+              Instagram
+            </a>
+          </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GALLERY_IMAGES.map((img, idx) => (
