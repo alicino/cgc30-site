@@ -24,13 +24,14 @@ export function GaleriaPage() {
             </a>
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {GALLERY_IMAGES.map((img, idx) => (
             <motion.div
               key={img.id}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: idx * 0.1 }}
+              className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
               <Card className="overflow-hidden border-none shadow-md hover:shadow-xl transition-shadow group">
                 <CardContent className="p-0">

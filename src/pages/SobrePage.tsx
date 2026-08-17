@@ -30,8 +30,8 @@ export function SobrePage() {
           <div className="relative">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800"
-                alt="Jovens em reunião"
+                src="/images/sobre/geracoes-membros.jpeg"
+                alt="Gerações de membros do Capítulo Grande Campinas nº 30"
                 className="object-cover w-full h-full"
               />
             </div>

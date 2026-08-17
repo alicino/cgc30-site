@@ -5,6 +5,7 @@ export const GALLERY_IMAGES = [
   { id: 4, url: '/images/galeria/evento-capitular.jpeg', alt: 'Evento Capitular' },
   { id: 5, url: '/images/galeria/foto-apos-reuniao.jpeg', alt: 'Fotos após Reunião' },
   { id: 6, url: '/images/galeria/jantar-40-anos.jpeg', alt: 'Comemoração 40 anos Capítulo' },
+  { id: 7, url: '/images/galeria/festa-junina.jpeg', alt: 'Festa Junina DeMolay' },
 ];
 export const DOWNLOAD_FILES = [
   { id: 1, name: 'Estatuto Social do Capítulo', size: '2.4 MB', format: 'PDF', date: '10/02/2024', url: '' },
