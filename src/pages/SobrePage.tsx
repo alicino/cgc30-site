@@ -2,7 +2,7 @@ import React from 'react';
 import { Shield, Target, Heart, Eye, Users, Bookmark, Star } from 'lucide-react';
 const VIRTUES = [
   { name: 'Amor Filial', icon: Heart, desc: 'O amor e respeito incondicional pelos pais.' },
-  { name: 'Reverência', icon: Star, desc: 'O respeito pelas coisas sagradas e crenças alheias.' },
+  { name: 'Reverência pelas Coisas Sagradas', icon: Star, desc: 'O respeito pelas coisas sagradas e crenças alheias.' },
   { name: 'Cortesia', icon: Users, desc: 'A educação e o bom trato com todas as pessoas.' },
   { name: 'Companheirismo', icon: Shield, desc: 'A amizade leal entre os irmãos de ordem.' },
   { name: 'Fidelidade', icon: Bookmark, desc: 'Ser fiel a si mesmo, aos seus ideais e à ordem.' },
@@ -45,11 +45,11 @@ export function SobrePage() {
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-12">As 7 Virtudes Cardeais</h2>
           <div className="flex flex-wrap justify-center gap-6">
             {VIRTUES.map((v) => (
-              <div key={v.name} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] p-6 rounded-2xl bg-muted/50 border space-y-3 hover:bg-accent transition-colors">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+              <div key={v.name} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] p-6 rounded-2xl bg-muted/50 border flex flex-col gap-3 hover:bg-accent transition-colors">
+                <div className="h-10 w-10 shrink-0 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                   <v.icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-bold">{v.name}</h3>
+                <h3 className="text-lg font-bold leading-snug text-balance sm:min-h-[3.125rem]">{v.name}</h3>
                 <p className="text-sm text-muted-foreground">{v.desc}</p>
               </div>
             ))}
@@ -62,18 +62,19 @@ export function SobrePage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { role: 'Mestre Conselheiro', img: '/images/lideranca/mcons.jpg' },
-              { role: '1º Conselheiro', img: '/images/lideranca/1cons.jpg' },
-              { role: '2º Conselheiro', img: '/images/lideranca/2cons.jpg' },
-              { role: 'Presidente do Conselho', img: '/images/lideranca/pcons.jpg' }
+              { name: 'Rafael Alves Pereira Machado', role: 'Mestre Conselheiro', img: '/images/lideranca/mcons.jpg' },
+              { name: 'Renan Pinheiro de Araújo', role: '1º Conselheiro', img: '/images/lideranca/1cons.jpg' },
+              { name: 'Caio Tersi Golzi', role: '2º Conselheiro', img: '/images/lideranca/2cons.jpg' },
+              { name: 'Felipe Gabriel Jaqueta', role: 'Presidente do Conselho', img: '/images/lideranca/pcons.jpg' }
             ].map((leader, i) => (
               <div key={i} className="space-y-4">
                 <div className="aspect-square rounded-full overflow-hidden border-4 border-background shadow-lg grayscale hover:grayscale-0 transition-all">
-                  <img src={leader.img} alt={leader.role} className="object-cover w-full h-full" />
+                  <img src={leader.img} alt={`${leader.name} — ${leader.role}`} className="object-cover w-full h-full" />
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg">{leader.role}</h4>
-                  <p className="text-sm text-muted-foreground">Gestão 2026.2</p>
+                <div className="space-y-1">
+                  <h4 className="font-bold text-lg leading-snug text-balance">{leader.name}</h4>
+                  <p className="text-sm font-medium text-primary">{leader.role}</p>
+                  <p className="text-xs text-muted-foreground">Gestão 2026.2</p>
                 </div>
               </div>
             ))}

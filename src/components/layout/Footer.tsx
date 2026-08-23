@@ -21,8 +21,9 @@ export function Footer() {
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" /> contato@cgc30.com
               </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" /> Av. Orosimbo Maia, 280 - Centro, Campinas - SP, 13010-211
+              <li className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 shrink-0 mt-0.5" />
+                <span>Rua Isolethe Augusta Sousa Aranha, 188 - Centro, Campinas - SP, 13030-217</span>
               </li>
             </ul>
           </div>

@@ -2,6 +2,7 @@
 slug: minha-jornada-na-ordem-demolay-parte-2
 title: "Minha Jornada na Ordem DeMolay – Parte II"
 author: "Ir. Erick Christyan Silva Coelho"
+authorAffiliation: "Membro do Capítulo Danilo Edmir Trevisan nº 341"
 date: "16 Aug, 2026"
 summary: "O meu sentimento como DeMolay e encontrar irmãos de verdade neste Ordem me deu um sentido maior na vida. Parte II"
 tags: ["sentimento", "iniciação", "jornada"]

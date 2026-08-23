@@ -73,7 +73,7 @@ export function ArtigoPage() {
             </div>
             <div>
               <p className="font-semibold text-foreground text-sm">{article.author}</p>
-              <p className="text-xs text-muted-foreground">Membro do Capítulo Grande Campinas nº 30</p>
+              <p className="text-xs text-muted-foreground">{article.authorAffiliation}</p>
             </div>
           </div>
           <Button variant="outline" asChild>

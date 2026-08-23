@@ -30,7 +30,7 @@ export function DownloadsPage() {
               <div className="p-6 flex items-center justify-center">
                 <div className="p-4 rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
                   {file.name.includes('Estatuto') ? <Shield className="h-8 w-8" /> :
-                   file.name.includes('Inscrição') ? <FileCheck className="h-8 w-8" /> : <ScrollText className="h-8 w-8" />}
+                   file.name.includes('Indicação') ? <FileCheck className="h-8 w-8" /> : <ScrollText className="h-8 w-8" />}
                 </div>
               </div>
               <div className="flex-1">

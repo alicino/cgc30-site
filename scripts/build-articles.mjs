@@ -132,6 +132,7 @@ const articles = files.map((file, index) => {
     slug: data.slug || file.replace('.md', ''),
     title: data.title,
     author: data.author,
+    authorAffiliation: data.authorAffiliation || 'Membro do Capítulo Grande Campinas nº 30',
     date: data.date,
     summary: data.summary,
     tags: Array.isArray(data.tags) ? data.tags : [],
@@ -167,6 +168,7 @@ export interface Article {
   slug: string;
   title: string;
   author: string;
+  authorAffiliation: string;
   date: string;
   summary: string;
   tags: string[];

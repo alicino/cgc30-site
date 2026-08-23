@@ -8,42 +8,10 @@ export const GALLERY_IMAGES = [
   { id: 7, url: '/images/galeria/festa-junina.jpeg', alt: 'Festa Junina DeMolay' },
 ];
 export const DOWNLOAD_FILES = [
-  { id: 1, name: 'Estatuto Social do Capítulo', size: '2.4 MB', format: 'PDF', date: '10/02/2024', url: '' },
-  { id: 2, name: 'Guia do Iniciático 2024', size: '5.1 MB', format: 'PDF', date: '05/01/2024', url: '' },
-  { id: 3, name: 'Ficha de Inscrição de Membro', size: '0.8 MB', format: 'PDF', date: '20/03/2024', url: '' },
-  { id: 4, name: 'Calendário de Virtudes Semestral', size: '1.5 MB', format: 'PDF', date: '12/03/2024', url: '' },
+  { id: 3, name: 'Ficha de Indicação Candidato', size: '1.0 MB', format: 'PDF', date: '23/08/2026', url: '/docs/ficha_indicacao.pdf' },
   { id: 5, name: 'Significado do Estandarte do Capítulo', size: '1 MB', format: 'PDF', date: '31/05/2025', url: '/docs/estandarte-cgc30.pdf' },
   { id: 6, name: 'Plano Pedagógico do Supremo Conselho', size: '3 MB', format: 'PDF', date: '19/09/2025', url: '/docs/DOC-20250919-WA0084.pdf' },
 ];
-export const ARTICLES = [
-  {
-    id: 1,
-    title: 'O Poder do Amor Filial na Juventude',
-    summary: 'Explorando a primeira e principal virtude DeMolay e como ela molda o caráter dos nossos jovens em Campinas.',
-    date: '15 Mai, 2024',
-    author: 'Ir. João Silva',
-    url: '/artigos/amor-filial',
-    internal: true
-  },
-  {
-    id: 2,
-    title: 'Liderança Servidora: Lições de Frank S. Land',
-    summary: 'Como os princípios do nosso fundador continuam guiando os Mestres Conselheiros no século XXI.',
-    date: '10 Mai, 2024',
-    author: 'Ir. Marcos Pereira',
-    url: '#'
-  },
-  {
-    id: 3,
-    title: 'A Importância da Filantropia no Capítulo',
-    summary: 'Relato das últimas ações sociais realizadas pelo Capítulo Grande Campinas e o impacto na comunidade local.',
-    date: '05 Mai, 2024',
-    author: 'Ir. Carlos Alberto',
-    url: '#'
-  }
-];
-// Fonte de verdade: /prompts/calendario_LXXXIV.md (Cronograma de sessões e eventos da LXXXIV Gestão)
-// type = coluna "Tipo", title = coluna "Descrição" (nome da reunião), date = coluna "Data" (DD/MM/AAAA)
 export const EVENTS = [
   {
     id: 1,
