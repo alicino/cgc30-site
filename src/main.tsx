@@ -19,6 +19,8 @@ import { ArtigosPage } from '@/pages/ArtigosPage';
 import { CalendarioPage } from '@/pages/CalendarioPage';
 import { SobrePage } from '@/pages/SobrePage';
 import { ArtigoPage } from '@/pages/ArtigoPage';
+import { PrivacidadePage } from '@/pages/PrivacidadePage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -33,6 +35,8 @@ const router = createBrowserRouter([
       { path: "/artigos/:slug", element: <ArtigoPage /> },
       { path: "/calendario", element: <CalendarioPage /> },
       { path: "/sobre", element: <SobrePage /> },
+      { path: "/privacidade", element: <PrivacidadePage /> },
+      { path: "*", element: <NotFoundPage /> },
     ]
   },
 ]);

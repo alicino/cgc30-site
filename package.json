@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/build-articles.mjs && vite --host 0.0.0.0 --port ${PORT:-3033}",
-    "build": "node scripts/build-articles.mjs && vite build",
+    "build": "node scripts/build-articles.mjs && vite build && cp dist/client/index.html dist/client/404.html",
     "lint": "eslint --cache -f json --quiet .",
     "preview": "bun run build && vite preview --host 0.0.0.0 --port ${PORT:-4173}",
     "deploy": "bun run build && wrangler deploy",

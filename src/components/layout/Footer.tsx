@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ShieldCheck, Mail, MapPin } from 'lucide-react';
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -39,7 +40,7 @@ export function Footer() {
         <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>© {currentYear} Ordem DeMolay - Capítulo Grande Campinas nº 30. Todos os direitos reservados.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-primary">Privacidade</a>
+            <Link to="/privacidade" className="hover:text-primary">Privacidade</Link>
             <a href="#" className="hover:text-primary">Regulamento Interno</a>
           </div>
         </div>
