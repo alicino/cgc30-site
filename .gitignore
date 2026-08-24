@@ -16,6 +16,14 @@ dist/
 .env.local
 .env.*.local
 
+# ─── Domínio de produção (ainda não é o momento) ──────────────────────────────
+# public/CNAME já está preparado para quando este site for promovido ao
+# repositório produtivo (cgc30-landing), mas cgc30.com ainda aponta para o
+# site atual. Manter fora do commit aqui evita reivindicar o domínio cedo
+# demais / conflitar com o GitHub Pages do cgc30-landing. O arquivo continua
+# no disco e será copiado normalmente no dia da migração (via rsync).
+public/CNAME
+
 # ─── Documentação interna (não versionar) ─────────────────────────────────────
 # Estes arquivos contêm contexto de projeto, decisões técnicas e planejamento
 # interno. Mantenha-os locais e compartilhe por outros meios quando necessário.

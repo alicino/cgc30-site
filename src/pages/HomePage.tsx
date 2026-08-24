@@ -147,7 +147,7 @@ export function HomePage() {
                   <Link to="/sobre">Como Ingressar</Link>
                 </Button>
                 <Button size="lg" variant="ghost" className="rounded-full px-12 h-16 text-lg font-bold text-white border border-white/20 hover:bg-white/10 transition-all" asChild>
-                  <Link to="/artigos">Conheça Nossos Valores</Link>
+                  <Link to="/sobre#virtudes">Conheça Nossos Valores</Link>
                 </Button>
               </div>
             </div>
