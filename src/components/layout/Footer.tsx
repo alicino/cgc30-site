@@ -41,7 +41,6 @@ export function Footer() {
           <p>© {currentYear} Ordem DeMolay - Capítulo Grande Campinas nº 30. Todos os direitos reservados.</p>
           <div className="flex gap-6">
             <Link to="/privacidade" className="hover:text-primary">Privacidade</Link>
-            <a href="#" className="hover:text-primary">Regulamento Interno</a>
           </div>
         </div>
       </div>

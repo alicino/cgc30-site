@@ -144,7 +144,7 @@ export function HomePage() {
               </p>
               <div className="flex flex-wrap justify-center gap-6 pt-4">
                 <Button size="lg" variant="secondary" className="rounded-full px-12 h-16 text-lg font-bold hover:scale-105 transition-transform" asChild>
-                  <Link to="/sobre">Como Ingressar</Link>
+                  <Link to="/admissao">Como Ingressar</Link>
                 </Button>
                 <Button size="lg" variant="ghost" className="rounded-full px-12 h-16 text-lg font-bold text-white border border-white/20 hover:bg-white/10 transition-all" asChild>
                   <Link to="/sobre#virtudes">Conheça Nossos Valores</Link>

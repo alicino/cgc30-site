@@ -8,7 +8,11 @@ export function SiteLayout() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    if (!hash) return;
+    if (!hash) {
+      // Sem âncora: sempre inicia a nova página do topo
+      window.scrollTo(0, 0);
+      return;
+    }
     const id = hash.replace('#', '');
     // pequeno atraso para aguardar a troca de página e a animação de entrada
     const timer = setTimeout(() => {

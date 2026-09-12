@@ -10,6 +10,7 @@ dist/
 .vite/
 *.tsbuildinfo
 .wrangler/
+deploy/
 
 # ─── Variáveis de ambiente ────────────────────────────────────────────────────
 .env

@@ -9,6 +9,7 @@ export const GALLERY_IMAGES = [
 ];
 export const DOWNLOAD_FILES = [
   { id: 3, name: 'Ficha de Indicação Candidato', size: '1.0 MB', format: 'PDF', date: '23/08/2026', url: '/docs/ficha_indicacao.pdf' },
+  { id: 7, name: 'Vade Mecum DeMolay', size: '4.2 MB', format: 'PDF', date: '12/09/2026', url: '/docs/Vade_Mecum_DeMolay.pdf' },
   { id: 5, name: 'Significado do Estandarte do Capítulo', size: '1 MB', format: 'PDF', date: '31/05/2025', url: '/docs/estandarte-cgc30.pdf' },
   { id: 6, name: 'Plano Pedagógico do Supremo Conselho', size: '3 MB', format: 'PDF', date: '19/09/2025', url: '/docs/DOC-20250919-WA0084.pdf' },
 ];
