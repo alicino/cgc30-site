@@ -72,25 +72,17 @@ export const EVENTS = [
   },
   {
     id: 8,
-    type: 'A Definir',
-    title: 'A Definir',
-    date: '11/10/2026',
-    time: 'A Definir',
-    location: 'A Definir'
-  },
-  {
-    id: 9,
     type: 'Ordinária',
     title: 'Palestra ministrada pelo tio Cezar Velardez.',
-    date: '18/10/2026',
+    date: '11/10/2026',
     time: '9h',
     location: 'Loja Constância'
   },
   {
-    id: 10,
+    id: 9,
     type: 'Administrativa',
     title: 'Apresentação dos trabalhos dos irmãos Iniciáticos',
-    date: '25/10/2026',
+    date: '18/10/2026',
     time: '9h',
     location: 'Loja Constância'
   },
